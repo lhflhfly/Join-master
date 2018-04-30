@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Join</string>
+    <string name="title_activity_find_sporst">FindSporstActivity</string>
+    <string name="notice">公告</string>
+    <string name="city_name">城市名</string>
+    <string name="search_stadiumname">输入场馆名称</string>
+    <string name="personal_information">个人信息</string>
+    <string name="booking_management">预约管理</string>
+    <string name="demand_management">发布的需求</string>
+    <string name="join_need">加入的需求</string>
+    <string name="mycollection">我的收藏</string>
+    <string name="log_out">退出登录</string>
+    <string name="launch_text">加入你的运动世界</string>
+    <string name="submit">提 交</string>
+</resources>

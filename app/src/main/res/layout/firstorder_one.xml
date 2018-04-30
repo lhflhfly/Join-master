@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/lout1"
+        android:layout_width="match_parent"
+        android:layout_height="200sp">
+
+        <cn.bingoogolapple.bgabanner.BGABanner
+            android:id="@+id/banner"
+            app:banner_transitionEffect="zoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </cn.bingoogolapple.bgabanner.BGABanner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lout2"
+        android:background="@drawable/bggirdview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/lout1">
+
+            <GridView
+                android:id="@+id/gv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lout1"
+                android:numColumns="4">
+            </GridView>
+
+        </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/lout2"
+        android:background="#33000000" />
+
+    <LinearLayout
+        android:id="@+id/lout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lout2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lout5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:ems="1"
+                android:gravity="center"
+                android:text="公告栏"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#b4b0b0" />
+
+        <LinearLayout
+            android:id="@+id/lout6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8">
+
+            <ViewFlipper
+                android:id="@+id/vf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:autoStart="true"
+                android:inAnimation="@anim/anim_marquee_in"
+                android:outAnimation="@anim/anim_marquee_out">
+
+                <include layout="@layout/gonggaolan" />
+
+                <include layout="@layout/gonggaolan2" />
+
+            </ViewFlipper>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/lout3"
+        android:background="#33000000" />
+
+    <LinearLayout
+        android:id="@+id/lout4"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/line2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="─── 场馆列表 ───"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/lout4"
+        android:background="#33000000" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lout4">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lhf.join">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/join"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="0ghSE8hxUYZ15KVlDVYnDNTBNiGtCfF2" />
+
+        <activity
+            android:name=".View.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".View.User.RegisterActivity" />
+        <activity android:name=".View.User.UpdateUserActivity" />
+        <activity android:name=".View.User.UserInformationActivity" />
+        <activity android:name=".View.User.LoginActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <activity android:name=".View.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".View.Stadium.SearchStadiumActivity" />
+        <activity android:name=".View.Stadium.StadiumActivity" />
+        <activity android:name=".View.Stadium.OrderStadiumActivity" />
+        <activity android:name=".View.User.OrderInformationActivity" />
+        <activity android:name=".View.User.NeedInformationActivity" />
+        <activity android:name=".View.Find.InsertNeedActivity" />
+        <activity android:name=".View.Find.FindActivity" />
+        <activity android:name=".View.User.UpdatePassword" />
+        <activity android:name=".View.Find.FindActivity_Me" />
+        <activity android:name=".View.Collection.MyCollection" />
+        <activity android:name=".View.Find.MyJoinNeedActivity"/>
+        <activity android:name=".View.Find.JoinedNeedActivity"/>
+
+    </application>
+
+</manifest>

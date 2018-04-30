@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_order"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/holo_blue_dark">
+        <TextView
+            android:id="@+id/tv_city"
+            android:text="@string/city_name"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:id="@+id/icon_xiala"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/xialacity"
+            />
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/tv_search"
+            android:text="@string/search_stadiumname"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:background="@drawable/sousuo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+    <View
+        android:layout_below="@+id/tb_order"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#029acc" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sr_order"
+        android:layout_below="@+id/tb_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_below="@+id/tb_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/firstorder_one"></include>
+
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>
