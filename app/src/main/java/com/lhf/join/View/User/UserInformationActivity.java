@@ -38,6 +38,7 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
     private ImageView icon_back;
     private Button btn_update;
     private Button btn_password;
+    private Button btn_proflie;
     private String userId;
 
 
@@ -66,6 +67,7 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
         tv_tel = findViewById(R.id.tv_tel);
         btn_update = findViewById(R.id.btn_update);
         btn_password = findViewById(R.id.btn_password);
+        btn_proflie = findViewById(R.id.btn_proflie);
         icon_back = findViewById(R.id.icon_back);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
@@ -89,6 +91,8 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
 //        tv_myright.setText(user.getMyright());
         btn_update.setOnClickListener(this);
         btn_password.setOnClickListener(this);
+        btn_proflie.setOnClickListener(this);
+
 
 
     }
@@ -174,6 +178,13 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
             case R.id.btn_password:
                 Intent intent1 = new Intent(UserInformationActivity.this, UpdatePassword.class);
                 Bundle mBundle1 = new Bundle();
+                mBundle1.putSerializable("user", user);
+                intent1.putExtras(mBundle1);
+                startActivity(intent1);
+                break;
+            case R.id.btn_proflie:
+                intent1 = new Intent(UserInformationActivity.this, UpdateProflieActivity.class);
+                mBundle1 = new Bundle();
                 mBundle1.putSerializable("user", user);
                 intent1.putExtras(mBundle1);
                 startActivity(intent1);

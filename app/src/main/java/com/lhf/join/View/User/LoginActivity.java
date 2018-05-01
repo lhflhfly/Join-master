@@ -40,6 +40,7 @@ import okhttp3.Response;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.lhf.join.Constant.Constant.URL_LOGIN;
+import static com.lhf.join.Constant.Constant.URL_PROFLIE;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText et_username;
@@ -264,6 +265,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         user.setSex(results.getString("sex"));
                         user.setTel(results.getString("tel"));
                         user.setMyright(results.getString("myRight"));
+                        user.setProflie(URL_PROFLIE+results.getString("proflie"));
                         Toast.makeText(LoginActivity.this, "正在登陆，请稍后", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle mBundle = new Bundle();

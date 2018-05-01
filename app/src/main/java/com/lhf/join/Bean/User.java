@@ -2,7 +2,7 @@ package com.lhf.join.Bean;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private int userId;
     private String username;
     private String password;
@@ -10,6 +10,15 @@ public class User implements Serializable{
     private String sex;
     private String tel;
     private String myright;
+    private String proflie;
+
+    public String getProflie() {
+        return proflie;
+    }
+
+    public void setProflie(String proflie) {
+        this.proflie = proflie;
+    }
 
 
     public String getRealname() {

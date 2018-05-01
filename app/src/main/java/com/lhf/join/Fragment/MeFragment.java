@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,9 @@ import com.lhf.join.View.User.NeedInformationActivity;
 import com.lhf.join.View.User.LoginActivity;
 import com.lhf.join.View.User.OrderInformationActivity;
 import com.lhf.join.View.User.UserInformationActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,11 +37,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.lhf.join.Constant.Constant.URL_PROFLIE;
 import static com.lhf.join.Constant.Constant.URL_SELECTUSERBYUSERID;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener {
     private TextView tv_username;
     private User user;
+    private ImageView img_usericon;
     private LinearLayout btn_logout;
     private LinearLayout btn_user;
     private LinearLayout btn_order;
@@ -59,6 +66,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         btn_find = view.findViewById(R.id.btn_find);
         btn_collect = view.findViewById(R.id.btn_collect);
         btn_joinedneed = view.findViewById(R.id.btn_joinedneed);
+        img_usericon = view.findViewById(R.id.img_usericon);
 
 
 
@@ -142,7 +150,19 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                         user.setSex(results.getString("sex"));
                         user.setTel(results.getString("tel"));
                         user.setMyright(results.getString("myRight"));
+                        user.setProflie(URL_PROFLIE+results.getString("proflie"));
+                        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(mContext);
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        ImageLoader.getInstance().init(configuration);
+                        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                                .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
+                                .showImageOnLoading(R.drawable.loading)
+                                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
+                                .delayBeforeLoading(1000)  // 下载前的延迟时间
+                                .build();
+                        ImageLoader.getInstance().displayImage(user.getProflie(),img_usericon,options);
                         tv_username.setText(user.getUsername());
+
 
                     }else{
                         Toast.makeText(mContext,"更新错误",Toast.LENGTH_LONG).show();

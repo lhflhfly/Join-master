@@ -42,6 +42,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_FINDINFORMATION;
+import static com.lhf.join.Constant.Constant.URL_PROFLIE;
 
 public class FindFragment extends BaseFragment{
     private User user;
@@ -229,7 +230,9 @@ public class FindFragment extends BaseFragment{
                         need.setTime(js.getString("time"));
                         need.setNum(js.getInt("num"));
                         need.setNum_join(js.getInt("num_join"));
+                        need.setProflie(URL_PROFLIE+js.optString("userproflie"));
                         need.setRemark(js.getString("remark"));
+
                         mData.add(need);
                     }
                     recyclerView.setLayoutManager(layoutManager);

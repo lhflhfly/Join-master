@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,9 @@ import com.lhf.join.View.Find.FindActivity_Me;
 import com.lhf.join.View.Find.JoinedNeedActivity;
 import com.lhf.join.View.FixedRecyclerView;
 import com.lhf.join.View.Stadium.StadiumActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +58,7 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
         TextView num_join;
         TextView time;
         TextView remark;
+        ImageView user_proflie;
 
         public ViewHolder(View view) {
             super(view);
@@ -64,6 +69,7 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
             time = view.findViewById(R.id.tv_time);
             num_join = view.findViewById(R.id.tv_num_join);
             remark = view.findViewById(R.id.tv_remark);
+            user_proflie = view.findViewById(R.id.user_proflie);
 
         }
     }
@@ -124,6 +130,15 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
         holder.num.setText("召集人数:" + need.getNum());
         holder.num_join.setText("加入人数:" + need.getNum_join());
         holder.remark.setText("备注:" + need.getRemark());
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(mContext);
+        ImageLoader.getInstance().init(configuration);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnLoading(R.drawable.loading)
+                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
+                .delayBeforeLoading(1000)  // 下载前的延迟时间
+                .build();
+        ImageLoader.getInstance().displayImage(need.getProflie(), holder.user_proflie,options);
     }
 
     @Override
