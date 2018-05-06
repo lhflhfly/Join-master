@@ -136,7 +136,7 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
                 .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
                 .showImageOnLoading(R.drawable.loading)
                 .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
-                .delayBeforeLoading(1000)  // 下载前的延迟时间
+                .delayBeforeLoading(100)  // 下载前的延迟时间
                 .build();
         ImageLoader.getInstance().displayImage(need.getProflie(), holder.user_proflie,options);
     }

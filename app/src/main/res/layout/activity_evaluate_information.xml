@@ -1,91 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".View.User.OrderInformationActivity">
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
         android:background="@android:color/holo_blue_dark"
-        android:gravity="center">
-
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="?attr/actionBarSize">
         <ImageView
             android:id="@+id/icon_back"
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:layout_gravity="center"
             android:src="@drawable/back" />
-
         <TextView
             style="@style/title"
-            android:text="你的预约" />
+            android:text="你的评价"
+             />
 
     </LinearLayout>
-
     <RadioGroup
         android:id="@+id/rg_orderinf"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
         android:gravity="center"
-        android:orientation="horizontal">
-
+        android:layout_height="25dp">
         <RadioButton
             android:id="@+id/rb_nouse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
             android:gravity="center"
-            android:text="未到时"
-            android:textColor="@drawable/btn_txt" />
-
+            android:text="待评价"
+            android:button="@null"
+            android:textColor="@drawable/btn_txt"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:background="#b4b0b0" />
-
         <RadioButton
             android:id="@+id/rb_past"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
             android:gravity="center"
-            android:text="已过时"
-            android:textColor="@drawable/btn_txt" />
+            android:button="@null"
+            android:text="已评价"
+            android:textColor="@drawable/btn_txt"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RadioGroup>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
+        android:background="@android:color/darker_gray"
+        />
     <FrameLayout
         android:id="@+id/framelayout_orderinf"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
 
         <!--<TextView-->
-        <!--android:id="@+id/tv_noorder"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal|center_vertical"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:textSize="30sp"-->
-        <!--android:textStyle="bold" />-->
+            <!--android:id="@+id/tv_noorder"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="30sp"-->
+            <!--android:textStyle="bold" />-->
         <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/rv_orderinformation"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+            <!--android:id="@+id/rv_orderinformation"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
         <!--</android.support.v7.widget.RecyclerView>-->
 

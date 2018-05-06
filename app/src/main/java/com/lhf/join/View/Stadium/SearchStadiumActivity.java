@@ -49,6 +49,7 @@ public class SearchStadiumActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private String city;
+    private ImageView icon_back;
     private User user;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -66,6 +67,7 @@ public class SearchStadiumActivity extends AppCompatActivity {
 
         et_search = findViewById(R.id.et_search_text);
         recyclerView = findViewById(R.id.rv_search);
+        icon_back = findViewById(R.id.icon_back);
         layoutManager = new LinearLayoutManager(this);
 
 
@@ -75,6 +77,12 @@ public class SearchStadiumActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         String type = (String) getIntent().getSerializableExtra("type");
         city = (String) getIntent().getSerializableExtra("city");
+        icon_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         System.out.println("type:" + type);
         System.out.println("city:" + city);
         if (type != null) {
@@ -167,6 +175,7 @@ public class SearchStadiumActivity extends AppCompatActivity {
                         stadium.setAdress(js.getString("adress"));
                         stadium.setNum(js.getString("num"));
                         stadium.setOpentime(js.getString("opentime"));
+                        stadium.setGrade((float)js.getDouble("grade"));
                         mData.add(stadium);
                     }
                     List<Stadium> mData2 = new ArrayList<>();
@@ -184,6 +193,7 @@ public class SearchStadiumActivity extends AppCompatActivity {
                         stadium.setStadiumtype(mData.get(i).getStadiumtype());
                         stadium.setStadiumId(mData.get(i).getStadiumId());
                         stadium.setOpentime(mData.get(i).getOpentime());
+                        stadium.setGrade(mData.get(i).getGrade());
                         mData2.add(stadium);
                     }
                     recyclerView.setLayoutManager(layoutManager);

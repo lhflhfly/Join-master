@@ -307,6 +307,7 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
                         stadium.setAdress(js.getString("adress"));
                         stadium.setNum(js.getString("num"));
                         stadium.setOpentime(js.getString("opentime"));
+                        stadium.setGrade((float)js.getDouble("grade"));
                         mData.add(stadium);
                     }
                     List<String> list = new ArrayList();
@@ -333,6 +334,7 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
                         stadium.setStadiumtype(mData.get(i).getStadiumtype());
                         stadium.setStadiumId(mData.get(i).getStadiumId());
                         stadium.setOpentime(mData.get(i).getOpentime());
+                        stadium.setGrade(mData.get(i).getGrade());
                         mData2.add(stadium);
                     }
                     recyclerView.setLayoutManager(layoutManager);
@@ -476,15 +478,12 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
                 public void run()
                 {
                     System.out.println("12" + BDLocation.getCity());
-                    if (BDLocation.getCity().equals("")) {
+                    if ("".equals(BDLocation.getCity())) {
                         tv_city.setText("城市名");
-                    }
-                    for (;;)
-                    {
+                    }else {
                         tv_city.setText(BDLocation.getCity());
                         Loading(tv_city.getText().toString());
                         mLocationClient.stop();
-
                         return;
                     }
                 }

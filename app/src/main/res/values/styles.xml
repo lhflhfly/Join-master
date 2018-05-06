@@ -42,6 +42,12 @@
         <item name="android:maxHeight">22dp</item>
     </style>
 
+    <style name="RatingBar_evaluate" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstars_evaluate</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxHeight">30dp</item>
+    </style>
+
     <style name="user_1">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -79,6 +85,15 @@
     <style name="My_CheckBox" parent="@android:style/Widget.Material.CompoundButton.CheckBox">
         <item name="android:colorControlActivated">@android:color/holo_blue_dark</item>
         <item name="android:colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="CustomDialog_fill" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 
 

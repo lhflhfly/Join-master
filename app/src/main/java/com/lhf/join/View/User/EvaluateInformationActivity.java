@@ -1,59 +1,29 @@
 package com.lhf.join.View.User;
 
 import android.graphics.Color;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.lhf.join.Adapter.BookAdapter;
+import com.lhf.join.Adapter.EvaluatePagerAdapter;
 import com.lhf.join.Adapter.OrderPagerAdapter;
-import com.lhf.join.Adapter.StadiumAdapter;
 import com.lhf.join.Base.BaseFragment;
-import com.lhf.join.Bean.App;
-import com.lhf.join.Bean.Book;
-import com.lhf.join.Bean.Notice;
-import com.lhf.join.Bean.Stadium;
 import com.lhf.join.Bean.User;
-import com.lhf.join.Fragment.FindFragment;
-import com.lhf.join.Fragment.MeFragment;
 import com.lhf.join.Fragment.NoUseOrderFragment;
-import com.lhf.join.Fragment.OrderFragment;
 import com.lhf.join.Fragment.UsedOrderFragment;
 import com.lhf.join.R;
-import com.lhf.join.View.MainActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
-import static com.lhf.join.Constant.Constant.URL_LOADINGORDER;
-import static com.lhf.join.Constant.Constant.URL_NOTICE;
-import static com.lhf.join.Constant.Constant.URL_ORDERINFORMATION;
-import static com.lhf.join.Constant.Constant.URL_PICTURE;
-
-public class OrderInformationActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
+public class EvaluateInformationActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
     private ImageView icon_back;
     public static final int PAGE_ONE = 0;
     public static final int PAGE_TWO = 1;
@@ -70,7 +40,7 @@ public class OrderInformationActivity extends AppCompatActivity implements ViewP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_information);
+        setContentView(R.layout.activity_evaluate_information);
         initview();
         initFragment();
         initdata();
@@ -98,7 +68,7 @@ public class OrderInformationActivity extends AppCompatActivity implements ViewP
         });
         viewpager.addOnPageChangeListener(this);
         mRg_main.check(R.id.rb_nouse);
-        viewpager.setAdapter(new OrderPagerAdapter(getSupportFragmentManager()));
+        viewpager.setAdapter(new EvaluatePagerAdapter(getSupportFragmentManager()));
         viewpager.setCurrentItem(0);
         mRg_main.setOnCheckedChangeListener(this);
 

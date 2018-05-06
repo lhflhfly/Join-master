@@ -36,7 +36,6 @@
         <activity android:name=".View.User.UserInformationActivity" />
         <activity android:name=".View.User.LoginActivity" />
 
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -59,10 +58,12 @@
         <activity android:name=".View.User.UpdatePassword" />
         <activity android:name=".View.Find.FindActivity_Me" />
         <activity android:name=".View.Collection.MyCollection" />
-        <activity android:name=".View.Find.MyJoinNeedActivity"/>
-        <activity android:name=".View.Find.JoinedNeedActivity"/>
-        <activity android:name=".View.User.UpdateProflieActivity"/>
-
+        <activity android:name=".View.Find.MyJoinNeedActivity" />
+        <activity android:name=".View.Find.JoinedNeedActivity" />
+        <activity android:name=".View.User.UpdateProflieActivity" />
+        <activity android:name=".View.Stadium.EvaluateActivity" />
+        <activity android:name=".View.User.EvaluateInformationActivity" />
+        <activity android:name=".View.User.MyEvaluation"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.lhf.join.Bean.User;
@@ -35,6 +37,8 @@ public class UpdateProflieActivity extends AppCompatActivity {
     private Button btn_xuanze;
     private String path;
     private User user;
+    private ImageView icon_choice;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,8 @@ public class UpdateProflieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_updateproflie);
         btn = findViewById(R.id.btn);
         btn_xuanze = findViewById(R.id.btn_xuancze);
+        icon_choice = findViewById(R.id.icon_choice);
+        progressBar = findViewById(R.id.progress);
         user = (User) getIntent().getSerializableExtra("user");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +96,7 @@ public class UpdateProflieActivity extends AppCompatActivity {
                 String path = cursor.getString(column_index);
                 System.out.println(path);
                    */
+                icon_choice.setImageBitmap(bitmap);
                 //第二种方式去读取路径
                 Cursor cursor =this.getContentResolver().query(uri, null, null, null, null);
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -122,8 +129,25 @@ public class UpdateProflieActivity extends AppCompatActivity {
         MultipartBody body = new MultipartBody(list, "UTF-8");
         //添加请求参数
         params.setRequestBody(body);
-        x.http().post(params, new Callback.CommonCallback<String>() {
+        x.http().post(params, new Callback.ProgressCallback<String>() {
 
+
+            @Override
+            public void onWaiting() {
+
+            }
+
+            @Override
+            public void onStarted() {
+
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isDownloading) {
+                progressBar.setMax((int)total);
+                progressBar.setProgress((int)current);
+
+            }
 
             @Override
             public void onSuccess(String result) {

@@ -3,6 +3,7 @@ package com.lhf.join.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -89,25 +90,30 @@ public class NeedAdapter extends RecyclerView.Adapter<NeedAdapter.ViewHolder> {
     }
 
     private void submitdelete(final int position, final Need need) {
-        AlertDialog.Builder submit = new AlertDialog.Builder(mContext);
-        submit.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mNeedlist.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(0, mNeedlist.size());
-                deleteorderInformation(need);
-            }
-        });
-        submit.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        submit.setMessage("确认删除此预约？");
-        submit.setTitle("提示");
-        submit.show();
+        AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("确认删除此需求？")
+                .setCancelable(false)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mNeedlist.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(0, mNeedlist.size());
+                        deleteorderInformation(need);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#4FAEE9"));
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#4FAEE9"));
+
     }
 
     private void deleteorderInformation(Need need) {

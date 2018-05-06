@@ -37,12 +37,20 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="15sp" />
+        <Button
+            android:id="@+id/btn_evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:visibility="gone"
+            android:text="评价" />
 
         <Button
             android:id="@+id/btn_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:visibility="gone"
             android:text="删除" />
 
     </LinearLayout>

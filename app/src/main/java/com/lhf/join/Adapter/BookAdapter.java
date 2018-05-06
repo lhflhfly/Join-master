@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,8 +24,11 @@ import com.lhf.join.Bean.Book;
 import com.lhf.join.Bean.Stadium;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
+import com.lhf.join.View.Find.FindActivity_Me;
+import com.lhf.join.View.Stadium.EvaluateActivity;
 import com.lhf.join.View.Stadium.StadiumActivity;
 import com.lhf.join.View.User.LoginActivity;
+import com.lhf.join.View.User.MyEvaluation;
 import com.lhf.join.View.User.OrderInformationActivity;
 import com.lhf.join.View.User.UpdateUserActivity;
 
@@ -47,6 +52,8 @@ import static com.lhf.join.Constant.Constant.URL_ORDERINFORMATION;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private List<Book> mBooklist;
     private Context mContext;
+    private int mflag;
+    private Book book;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -56,6 +63,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         TextView time;
         TextView time_order;
         Button btn_delete;
+        Button btn_evaluate;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -65,13 +74,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             time = view.findViewById(R.id.tv_time);
             time_order = view.findViewById(R.id.tv_time_order);
             btn_delete = view.findViewById(R.id.btn_delete);
+            btn_evaluate = view.findViewById(R.id.btn_evaluate);
 
         }
     }
 
-    public BookAdapter(Context context, List<Book> bookList) {
+    public BookAdapter(Context context, List<Book> bookList, int flag) {
         mContext = context;
         mBooklist = bookList;
+        mflag = flag;
+
 
     }
 
@@ -79,44 +91,84 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_book, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+        if(mflag ==3){
+            holder.bookView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition();
+                    Book book = mBooklist.get(position);
+                    Intent intent = new Intent(mContext, MyEvaluation.class);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putSerializable("book", book);
+                    intent.putExtras(mBundle);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
         return holder;
     }
 
     @Override
     public void onBindViewHolder(BookAdapter.ViewHolder holder, final int position) {
-        final Book book = mBooklist.get(position);
+        book = mBooklist.get(position);
         holder.stadiumname.setText("场馆名：" + book.getStadiumname());
         holder.place.setText(book.getPlaceName());
         holder.time.setText(book.getTime());
         holder.time_order.setText(book.getTime_order());
+        if (mflag == 0) {
+            holder.btn_delete.setVisibility(View.GONE);
+            holder.btn_evaluate.setVisibility(View.VISIBLE);
+
+        } else if (mflag == 1) {
+            holder.btn_delete.setVisibility(View.VISIBLE);
+            holder.btn_evaluate.setVisibility(View.GONE);
+        } else if (mflag == 3) {
+            holder.btn_delete.setVisibility(View.GONE);
+            holder.btn_evaluate.setVisibility(View.GONE);
+        }
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitdelete(position, book);
             }
         });
+        holder.btn_evaluate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, EvaluateActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("book", book);
+                intent.putExtras(mBundle);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     private void submitdelete(final int position, final Book book) {
-        AlertDialog.Builder submit = new AlertDialog.Builder(mContext);
-        submit.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mBooklist.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(0, mBooklist.size());
-                deleteorderInformation(book);
-            }
-        });
-        submit.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        submit.setMessage("确认删除此预约？");
-        submit.setTitle("提示");
-        submit.show();
+        AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("确认删除此预约？")
+                .setCancelable(false)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mBooklist.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(0, mBooklist.size());
+                        deleteorderInformation(book);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#4faee9"));
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#4faee9"));
     }
 
     private void deleteorderInformation(Book book) {

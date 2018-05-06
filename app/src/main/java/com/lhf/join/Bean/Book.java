@@ -1,13 +1,33 @@
 package com.lhf.join.Bean;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private int bookingId;
+    private int stadiumId;
+    private String stadiumpicture;
     private String stadiumname;
     private int userId;
     private String placeName;
     private String time;
     private String tel;
     private String time_order;
+
+    public int getStadiumId() {
+        return stadiumId;
+    }
+
+    public void setStadiumId(int stadiumId) {
+        this.stadiumId = stadiumId;
+    }
+
+    public String getStadiumpicture() {
+        return stadiumpicture;
+    }
+
+    public void setStadiumpicture(String stadiumpicture) {
+        this.stadiumpicture = stadiumpicture;
+    }
 
     public String getTime_order() {
         return time_order;

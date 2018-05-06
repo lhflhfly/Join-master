@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -35,6 +36,7 @@ public class StadiumAdapter extends RecyclerView.Adapter<StadiumAdapter.ViewHold
         TextView stadiumname;
         TextView stadiumtype;
         TextView stadiumadress;
+        RatingBar ratingBar;
 
         public ViewHolder(View view) {
             super(view);
@@ -43,6 +45,7 @@ public class StadiumAdapter extends RecyclerView.Adapter<StadiumAdapter.ViewHold
             stadiumname = view.findViewById(R.id.tv_changguan);
             stadiumadress = view.findViewById(R.id.tv_changguanadress);
             stadiumtype = view.findViewById(R.id.tv_changguan_type);
+            ratingBar = view.findViewById(R.id.ratbar);
         }
     }
 
@@ -85,6 +88,8 @@ public class StadiumAdapter extends RecyclerView.Adapter<StadiumAdapter.ViewHold
                 .delayBeforeLoading(1000)  // 下载前的延迟时间
                 .build();
         ImageLoader.getInstance().displayImage(stadium.getMainpicture(), holder.stadiumpicture,options);
+        holder.ratingBar.setRating(stadium.getGrade());
+        holder.ratingBar.setIsIndicator(true);
 
 //        Glide.with(mContext)
 //                .load(stadium.getMainpicture())

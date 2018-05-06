@@ -24,6 +24,7 @@ public class Constant {
     public static String URL_SEARCHSTADIUM = URL+"SearchStadiumByName_Servlet";
     public static String URL_ORDERSTADIUM = URL+"OrderStadium_Servlet";
     public static String URL_ORDERINFORMATION = URL+"OrderInformation_Servlet";
+    public static String URL_EVALUATEINFORMATION = URL+"EvaluateInformation_Servlet";
     public static String URL_DELETEORDERINFORMATION = URL+"DeleteOrderInformation_Servlet";
     public static String URL_PLACENAME = URL+"PlaceName_Servlet";
     public static String URL_INSERTNEED = URL+"InsertNeed_Servlet";
@@ -38,5 +39,6 @@ public class Constant {
     public static String URL_ISCOLLECTED = URL+"IsCollected_Servlet";
     public static String URL_SEARCHCOLLECTSTADIUM = URL+"SearchCollectStadium_Servlet";
     public static String URL_DELETEJOINFIND = URL+"DeleteJoinFind_Servlet";
-
+    public static String URL_EVALUATESTADIUM = URL+"EvaluateStadium_Servlet";
+    public static String URL_SELECTEVALUATION = URL+"SelectEvaluation_Servlet";
 }

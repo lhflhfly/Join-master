@@ -6,6 +6,7 @@
     <string name="search_stadiumname">输入场馆名称</string>
     <string name="personal_information">个人信息</string>
     <string name="booking_management">预约管理</string>
+    <string name="myevaluate">我的评价</string>
     <string name="demand_management">发布的需求</string>
     <string name="join_need">加入的需求</string>
     <string name="mycollection">我的收藏</string>

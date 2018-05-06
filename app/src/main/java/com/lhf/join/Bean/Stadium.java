@@ -14,6 +14,7 @@ public class Stadium implements Serializable {
     private String mainpicture;
     private String adress;
     private String opentime;
+    private Float grade;
 
     public Stadium(String mainpicture, String stadiumname, String stadiumtype, String adress) {
         this.stadiumname = stadiumname;
@@ -23,6 +24,14 @@ public class Stadium implements Serializable {
     }
 
     public Stadium() {
+    }
+
+    public Float getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Float grade) {
+        this.grade = grade;
     }
 
     public String getOpentime() {

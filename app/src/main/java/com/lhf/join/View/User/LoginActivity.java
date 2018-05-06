@@ -1,5 +1,6 @@
 package com.lhf.join.View.User;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox rememberPass;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    private static final int MY_PERMISSION_REQUEST_CODE = 10000;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -60,7 +63,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         setContentView(R.layout.activity_login);
-
+        ActivityCompat.requestPermissions(this,
+                new String[]{
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                },
+                MY_PERMISSION_REQUEST_CODE);
         initView();
         initData();
 
@@ -265,7 +275,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         user.setSex(results.getString("sex"));
                         user.setTel(results.getString("tel"));
                         user.setMyright(results.getString("myRight"));
-                        user.setProflie(URL_PROFLIE+results.getString("proflie"));
+                        user.setProflie(URL_PROFLIE+results.optString("proflie"));
                         Toast.makeText(LoginActivity.this, "正在登陆，请稍后", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle mBundle = new Bundle();

@@ -3,9 +3,11 @@ package com.lhf.join.View.Find;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +15,9 @@ import com.lhf.join.Bean.Need;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
 import com.lhf.join.View.User.UpdatePassword;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +46,8 @@ public class FindActivity extends AppCompatActivity {
     private User user1;
     private Need need;
     private ImageView icon_back;
+    private ImageView user_proflie;
+    private LinearLayout linearLayout;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
 
@@ -53,6 +60,7 @@ public class FindActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        linearLayout = findViewById(R.id.lout);
         tv_username = findViewById(R.id.tv_username);
         tv_stadiumname = findViewById(R.id.tv_stadiumname);
         tv_time = findViewById(R.id.tv_time);
@@ -61,6 +69,7 @@ public class FindActivity extends AppCompatActivity {
         tv_remark = findViewById(R.id.tv_remark);
         btn_join =findViewById(R.id.btn_join);
         icon_back= findViewById(R.id.icon_back);
+        user_proflie= findViewById(R.id.user_proflie);
     }
 
     private void initData() {
@@ -72,6 +81,15 @@ public class FindActivity extends AppCompatActivity {
         tv_num.setText("召集人数："+String.valueOf(need.getNum()));
         tv_num_join.setText("已加入人数："+String.valueOf(need.getNum_join()));
         tv_remark.setText("备注："+need.getRemark());
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(configuration);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnFail(R.drawable.me) // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnLoading(R.drawable.loading)
+                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
+                .delayBeforeLoading(100)  // 下载前的延迟时间
+                .build();
+        ImageLoader.getInstance().displayImage(need.getProflie(), user_proflie,options);
         icon_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +100,12 @@ public class FindActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 findJoin(user.getUserId(),need.getNeedId());
+            }
+        });
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

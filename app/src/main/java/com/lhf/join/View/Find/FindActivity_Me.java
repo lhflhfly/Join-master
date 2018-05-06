@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.lhf.join.Bean.Need;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +40,7 @@ public class FindActivity_Me extends AppCompatActivity {
     private User user;
     private Need need;
     private ImageView icon_back;
+    private ImageView user_proflie;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -55,6 +59,7 @@ public class FindActivity_Me extends AppCompatActivity {
         tv_num_join = findViewById(R.id.tv_num_join);
         tv_remark = findViewById(R.id.tv_remark);
         icon_back= findViewById(R.id.icon_back);
+        user_proflie= findViewById(R.id.user_proflie);
     }
 
     private void initData() {
@@ -66,6 +71,15 @@ public class FindActivity_Me extends AppCompatActivity {
         tv_num.setText("召集人数："+String.valueOf(need.getNum()));
         tv_num_join.setText("已加入人数："+String.valueOf(need.getNum_join()));
         tv_remark.setText("备注："+need.getRemark());
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(configuration);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnFail(R.drawable.me) // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnLoading(R.drawable.loading)
+                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
+                .delayBeforeLoading(100)  // 下载前的延迟时间
+                .build();
+        ImageLoader.getInstance().displayImage(need.getProflie(), user_proflie,options);
         icon_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

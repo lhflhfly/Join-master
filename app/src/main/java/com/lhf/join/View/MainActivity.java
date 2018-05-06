@@ -1,9 +1,12 @@
 package com.lhf.join.View;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private long exitTime = 0;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         this.rb_find.setCompoundDrawables(null, this.drawable2, null, null);
         this.rb_me.setCompoundDrawables(null, this.drawable3, null, null);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
+
 
     }
 
