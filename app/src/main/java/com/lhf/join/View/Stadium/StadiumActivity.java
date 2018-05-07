@@ -117,7 +117,8 @@ public class StadiumActivity extends AppCompatActivity {
         tv_type.setText(stadium.getStadiumtype());
         tv_area.setText(stadium.getArea() + "平方米");
         tv_num.setText(stadium.getNum() + "人");
-        tv_opentime.setText(stadium.getOpentime());
+        tv_opentime.setText(stadium.getOpentime()+"--"+stadium.getClosetime());
+        ratingBar.setRating(stadium.getGrade());
         if (stadium.getIndoor() == 1) {
             tv_indoor.setText(" 是");
         } else {

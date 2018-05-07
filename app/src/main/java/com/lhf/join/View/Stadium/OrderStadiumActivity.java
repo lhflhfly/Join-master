@@ -25,13 +25,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.lhf.join.Bean.Stadium;
 import com.lhf.join.Bean.User;
 import com.lhf.join.Fragment.OrderFragment;
 import com.lhf.join.R;
+import com.lhf.join.View.Find.SetTimeDialog;
 import com.lhf.join.View.User.LoginActivity;
 import com.lhf.join.View.User.RegisterActivity;
 import com.lhf.join.View.User.UpdateUserActivity;
@@ -54,7 +54,7 @@ import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_ORDERSTADIUM;
 
-public class OrderStadiumActivity extends AppCompatActivity implements View.OnClickListener, SetPlaceDialog.SetPlaceListener {
+public class OrderStadiumActivity extends AppCompatActivity implements View.OnClickListener, SetPlaceDialog.SetPlaceListener,SetTimeDialog.SetTimeListener {
     private Button btn_date;
     private Button btn_time;
     private Button btn_place;
@@ -109,8 +109,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void setTimeClick(View v) {
-        SetTimeDialog std = new SetTimeDialog();
-        std.setTV(tv_time);
+        SetTimeDialog std = new SetTimeDialog(stadium);
         std.show(getSupportFragmentManager(), "timePicker");
     }
 
@@ -149,6 +148,11 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
     private void OrderStadium(int userId, int stadiumId, String time, String time_order, String s, String tel) {
         String orderURL = URL_ORDERSTADIUM;
         new OrderStadiumAsyncTask().execute(orderURL, String.valueOf(userId), String.valueOf(stadiumId), time, time_order, s, tel);
+    }
+
+    @Override
+    public void onSetNumLComplete(String time) {
+        tv_time.setText(time);
     }
 
     private class OrderStadiumAsyncTask extends AsyncTask<String, Integer, String> {
@@ -207,6 +211,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
         tv_place.setText(place1);
     }
 
+
     @SuppressLint("ValidFragment")
     public static class SetDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         private TextView tv;
@@ -233,31 +238,5 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
             tv.setText(year + "年" + (month + 1) + "月" + day + "日");
         }
     }
-
-    public static class SetTimeDialog extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-        private TextView tv;
-
-        public void setTV(TextView tv) {
-            this.tv = tv;
-        }
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
-            TimePickerDialog dpd = new TimePickerDialog(getActivity(), this, hour, minute, true);
-            return dpd;
-        }
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            tv.setText(hourOfDay + ":" + minute);
-
-        }
-
-    }
-
 
 }

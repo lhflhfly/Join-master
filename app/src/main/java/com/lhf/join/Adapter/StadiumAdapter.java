@@ -85,7 +85,7 @@ public class StadiumAdapter extends RecyclerView.Adapter<StadiumAdapter.ViewHold
                 .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
                 .showImageOnLoading(R.drawable.loading)
                 .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
-                .delayBeforeLoading(1000)  // 下载前的延迟时间
+                .delayBeforeLoading(10)  // 下载前的延迟时间
                 .build();
         ImageLoader.getInstance().displayImage(stadium.getMainpicture(), holder.stadiumpicture,options);
         holder.ratingBar.setRating(stadium.getGrade());

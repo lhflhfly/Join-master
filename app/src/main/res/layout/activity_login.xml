@@ -62,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:hint="用户名"
                 android:lines="1"
+                android:inputType="text"
                 android:maxLength="16"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.lhf.join.Bean.Stadium;
 import com.lhf.join.R;
 import com.lhf.join.View.EasyPickerView;
 
@@ -27,9 +28,12 @@ public class SetTimeDialog extends DialogFragment{
     private EasyPickerView easyPickerView_m;
     private Button btn_confirm;
     private String time;
-    private int hour;
-    private int minute;
+    private String hour;
+    private Stadium mStadium;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
+    public SetTimeDialog(Stadium stadium){
+        this.mStadium = stadium;
+    }
 
     @Nullable
     @Override
@@ -40,7 +44,6 @@ public class SetTimeDialog extends DialogFragment{
         getDialog().setCanceledOnTouchOutside(false);
         View view = View.inflate(getContext(), R.layout.set_time,null);
         easyPickerView_h = view.findViewById(R.id.epv_h);
-        easyPickerView_m = view.findViewById(R.id.epv_m);
         btn_confirm = view.findViewById(R.id.btn_confirm);
 
         return view;
@@ -62,40 +65,22 @@ public class SetTimeDialog extends DialogFragment{
 
     private void initTime() {
         final ArrayList<String> numList = new ArrayList<>();
-        for (int i=0;i<24;i++){
-             numList.add(String.valueOf(i));
+        for (int i=Integer.parseInt(mStadium.getOpentime());i<=Integer.parseInt(mStadium.getClosetime());i=i+2){
+             numList.add(String.valueOf(i)+":00--"+String.valueOf(i+1)+":00");
         }
         easyPickerView_h.setDataList(numList);
         easyPickerView_h.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(int curIndex) {
-                hour = Integer.parseInt(numList.get(curIndex));
-                time = String.valueOf(hour)+":"+String.valueOf(minute);
+                hour = numList.get(curIndex);
+                time = String.valueOf(hour);
             }
 
             @Override
             public void onScrollFinished(int curIndex) {
-                hour = Integer.parseInt(numList.get(curIndex));
-                time = String.valueOf(hour)+":"+String.valueOf(minute);
+                hour = (numList.get(curIndex));
+                time = String.valueOf(hour);
 
-            }
-        });
-        final ArrayList<String> dataList2 = new ArrayList<>();
-        for(int i=0;i<60;i=i+10){
-            dataList2.add(String.valueOf(i));
-        }
-        easyPickerView_m.setDataList(dataList2);
-        easyPickerView_m.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged(int curIndex) {
-                minute = Integer.parseInt(dataList2.get(curIndex));
-                time = String.valueOf(hour)+":"+String.valueOf(minute);
-            }
-
-            @Override
-            public void onScrollFinished(int curIndex) {
-                minute = Integer.parseInt(dataList2.get(curIndex));
-                time = String.valueOf(hour)+":"+String.valueOf(minute);
             }
         });
         btn_confirm.setOnClickListener(new View.OnClickListener() {

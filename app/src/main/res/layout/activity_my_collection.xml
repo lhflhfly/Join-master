@@ -2,27 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".View.Collection.MyCollection">
+
     <LinearLayout
-        android:background="@android:color/holo_blue_dark"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center">
+
         <ImageView
             android:id="@+id/icon_back"
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:layout_gravity="center"
             android:src="@drawable/back" />
+
         <TextView
             style="@style/title"
-            android:text="我的收藏"
-            />
+            android:text="我的收藏" />
 
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_collect"
         android:layout_width="match_parent"
@@ -30,6 +33,19 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_nocollection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

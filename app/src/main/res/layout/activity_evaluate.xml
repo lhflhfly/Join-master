@@ -116,7 +116,8 @@
                 android:id="@+id/et_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:theme="@style/MyEditText1"
+                android:maxLines="4"
+                android:theme="@style/MyEditText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

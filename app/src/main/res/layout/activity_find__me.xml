@@ -28,13 +28,13 @@
     <LinearLayout
         android:background="@drawable/border"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="30dp">
+        android:layout_height="80dp"
+        android:paddingLeft="50dp">
 
         <ImageView
             android:id="@+id/user_proflie"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:src="@drawable/me" />
 

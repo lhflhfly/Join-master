@@ -82,6 +82,11 @@
         <item name="colorControlActivated">#4faee9</item>
     </style>
 
+    <style name="MyEditText2" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/transparent</item>
+        <item name="colorControlActivated">#e9afafaf</item>
+    </style>
+
     <style name="My_CheckBox" parent="@android:style/Widget.Material.CompoundButton.CheckBox">
         <item name="android:colorControlActivated">@android:color/holo_blue_dark</item>
         <item name="android:colorControlNormal">@android:color/white</item>

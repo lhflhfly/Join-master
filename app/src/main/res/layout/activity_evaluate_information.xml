@@ -29,29 +29,29 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_height="25dp">
+        android:layout_height="30dp">
         <RadioButton
             android:id="@+id/rb_nouse"
             android:gravity="center"
             android:text="待评价"
+            android:textStyle="bold"
             android:button="@null"
+            android:background="@drawable/btn_radio"
             android:textColor="@drawable/btn_txt"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#b4b0b0" />
+            android:layout_height="30dp" />
         <RadioButton
             android:id="@+id/rb_past"
             android:gravity="center"
             android:button="@null"
+            android:textStyle="bold"
             android:text="已评价"
+            android:background="@drawable/btn_radio"
             android:textColor="@drawable/btn_txt"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp" />
     </RadioGroup>
     <View
         android:layout_width="match_parent"

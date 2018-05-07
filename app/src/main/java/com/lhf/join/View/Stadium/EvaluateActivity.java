@@ -134,6 +134,7 @@ public class EvaluateActivity extends AppCompatActivity {
                     String loginresult = results.getString("result");
                     if (loginresult.equals("1")) {
                         Toast.makeText(EvaluateActivity.this, "评价成功", Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
                         Toast.makeText(EvaluateActivity.this, "评价失败，请重试", Toast.LENGTH_SHORT).show();
                     }

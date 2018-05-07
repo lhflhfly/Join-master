@@ -54,19 +54,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initView() {
-        this.mRg_main = ((RadioGroup) findViewById(R.id.rg));
-        this.rb_order = ((RadioButton) findViewById(R.id.rb_order));
-        this.rb_find = ((RadioButton) findViewById(R.id.rb_find));
-        this.rb_me = ((RadioButton) findViewById(R.id.rb_me));
-        this.drawable1 = getResources().getDrawable(R.drawable.btn_order);
-        this.drawable2 = getResources().getDrawable(R.drawable.btn_find);
-        this.drawable3 = getResources().getDrawable(R.drawable.btn_me);
-        this.drawable1.setBounds(0, 0, 69, 69);
-        this.drawable2.setBounds(0, 0, 69, 69);
-        this.drawable3.setBounds(0, 0, 69, 69);
-        this.rb_order.setCompoundDrawables(null, this.drawable1, null, null);
-        this.rb_find.setCompoundDrawables(null, this.drawable2, null, null);
-        this.rb_me.setCompoundDrawables(null, this.drawable3, null, null);
+        mRg_main = ((RadioGroup) findViewById(R.id.rg));
+        rb_order = ((RadioButton) findViewById(R.id.rb_order));
+        rb_find = ((RadioButton) findViewById(R.id.rb_find));
+        rb_me = ((RadioButton) findViewById(R.id.rb_me));
+        drawable1 = getResources().getDrawable(R.drawable.btn_order);
+        drawable2 = getResources().getDrawable(R.drawable.btn_find);
+        drawable3 = getResources().getDrawable(R.drawable.btn_me);
+        drawable1.setBounds(0, 0, 69, 69);
+        drawable2.setBounds(0, 0, 69, 69);
+        drawable3.setBounds(0, 0, 69, 69);
+        rb_order.setCompoundDrawables(null, this.drawable1, null, null);
+        rb_find.setCompoundDrawables(null, this.drawable2, null, null);
+        rb_me.setCompoundDrawables(null, this.drawable3, null, null);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
 
@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
         this.mBaseFragment.add(new OrderFragment());
         this.mBaseFragment.add(new FindFragment());
         this.mBaseFragment.add(new MeFragment());
-//        this.mBaseFragment.add(new FindFragment());
-//        this.mBaseFragment.add(new MeFragment());
     }
 
     @Override

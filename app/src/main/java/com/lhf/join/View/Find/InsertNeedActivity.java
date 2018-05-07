@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class InsertNeedActivity extends AppCompatActivity implements View.OnClic
     private String time_all;
     private String num_set;
     private EditText et_remark;
+    private ImageView icon_back;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +73,18 @@ public class InsertNeedActivity extends AppCompatActivity implements View.OnClic
         tv_date = findViewById(R.id.tv_date);
         tv_time = findViewById(R.id.tv_time);
         et_remark = findViewById(R.id.et_remark);
+        icon_back = findViewById(R.id.icon_back);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
     }
 
     private void initData() {
         user = (User) getIntent().getSerializableExtra("user");
+        icon_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btn_stadium.setOnClickListener(this);
         btn_date.setOnClickListener(this);
         btn_time.setOnClickListener(this);
@@ -91,7 +100,7 @@ public class InsertNeedActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void setTimeClick(View v) {
-        SetTimeDialog std = new SetTimeDialog();
+        SetTimeDialog std = new SetTimeDialog(stadium_set);
         std.show(getSupportFragmentManager(), "timePicker");
     }
 
@@ -115,7 +124,11 @@ public class InsertNeedActivity extends AppCompatActivity implements View.OnClic
                 setDateClick(v);
                 break;
             case R.id.btn_time:
+                if("".equals(tv_stadiumname.getText().toString())){
+                    Toast.makeText(this, "请先选择场馆！", Toast.LENGTH_SHORT).show();
+                }else{
                 setTimeClick(v);
+                }
                 break;
             case R.id.btn_num:
                 setNumClick(v);

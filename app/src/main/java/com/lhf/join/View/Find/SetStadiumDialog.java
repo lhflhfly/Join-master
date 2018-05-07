@@ -186,28 +186,15 @@ public class SetStadiumDialog extends DialogFragment{
                         stadium.setCity(js.getString("city"));
                         stadium.setMainpicture(URL_PICTURE+js.getString("mainpicture"));
                         stadium.setAdress(js.getString("adress"));
+                        stadium.setOpentime(js.getString("opentime"));
+                        stadium.setClosetime(js.getString("closetime"));
                         stadium.setNum(js.getString("num"));
+                        stadium.setGrade((float)js.getDouble("grade"));
                         mData.add(stadium);
-                    }
-                    List<Stadium> mData2 = new ArrayList<>();
-                    System.out.println("22");
-                    for(int i=0;i<mData.size();i++){
-                        Stadium stadium = new Stadium();
-                        stadium.setMainpicture(mData.get(i).getMainpicture());
-                        stadium.setAdress(mData.get(i).getAdress());
-                        stadium.setCity(mData.get(i).getCity());
-                        stadium.setAircondition(mData.get(i).getAircondition());
-                        stadium.setArea(mData.get(i).getArea());
-                        stadium.setStadiumname(mData.get(i).getStadiumname());
-                        stadium.setIndoor(mData.get(i).getIndoor());
-                        stadium.setNum(mData.get(i).getNum());
-                        stadium.setStadiumtype(mData.get(i).getStadiumtype());
-                        stadium.setStadiumId(mData.get(i).getStadiumId());
-                        mData2.add(stadium);
                     }
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-                    SetStadiumAdapter adapter = new SetStadiumAdapter(getContext(),mData2);
+                    SetStadiumAdapter adapter = new SetStadiumAdapter(getContext(),mData);
                     recyclerView.setNestedScrollingEnabled(false);
                     recyclerView.setAdapter(adapter);
                     adapter.setOnItemClickListener(new SetStadiumAdapter.OnRecyclerViewItemClickListener() {

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lhf.join.Adapter.FindAdapter;
 import com.lhf.join.Adapter.NeedAdapter;
@@ -42,6 +43,7 @@ public class MyJoinNeedActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ImageView btn_back;
+    private TextView tv_no;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class MyJoinNeedActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.icon_back);
         recyclerView = findViewById(R.id.rv_joinedneed);
         layoutManager = new LinearLayoutManager(this);
+        tv_no = findViewById(R.id.tv_no);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
     }
@@ -74,6 +77,7 @@ public class MyJoinNeedActivity extends AppCompatActivity {
             }
         });
         joinedneed(user.getUserId());
+        tv_no.setVisibility(View.GONE);
     }
 
     private void joinedneed(int userId) {
@@ -148,6 +152,8 @@ public class MyJoinNeedActivity extends AppCompatActivity {
                 NeedAdapter adapter = new NeedAdapter(MyJoinNeedActivity.this,mData2);
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(adapter);
+                tv_no.setVisibility(View.VISIBLE);
+                tv_no.setText("您还没有加入任何的需求");
             }
         }
     }

@@ -35,7 +35,11 @@ import com.lhf.join.Bean.User;
 import com.lhf.join.R;
 import com.lhf.join.View.SerachSelectDialog;
 import com.lhf.join.View.Stadium.SearchStadiumActivity;
+import com.lhf.join.View.Stadium.StadiumActivity;
 import com.lhf.join.View.User.UserInformationActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -174,7 +178,7 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
                         .centerCrop()
                         .dontAnimate()
                         .into(itemView);
-            }
+        }
         });
         mData = new LinkedList<App>();
         mData.add(new App(R.drawable.lanqiu,"篮球"));
@@ -195,11 +199,7 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
 
     }
 
-    private void Loading(String tv_city) {
-        String loadingUrl = URL_LOADINGORDER;
-        new LoadingAsyncTask().execute(loadingUrl,tv_city);
-    }
-
+    //设置网格布局监听事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(),SearchStadiumActivity.class);
@@ -257,7 +257,11 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
 
         }
     }
-
+    //网络请求主页数据
+    private void Loading(String tv_city) {
+        String loadingUrl = URL_LOADINGORDER;
+        new LoadingAsyncTask().execute(loadingUrl,tv_city);
+    }
     private class LoadingAsyncTask extends AsyncTask<String, Integer, String> {
         public LoadingAsyncTask() {
         }
@@ -285,14 +289,15 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
             }
             return results;
         }
-
+        //返回数据进行处理
         @Override
         protected void onPostExecute(String s) {
             System.out.println("返回的数据："+s);
-            List<Stadium> mData = new ArrayList<>();
+            final List<Stadium> mData = new ArrayList<>();
             if (!"null".equals(s)){
                 try {
                     JSONArray results = new JSONArray(s);
+                    //循环拿出接受的数据并赋值给stadium对象
                     for(int i=0;i<results.length();i++){
                         JSONObject js= results.getJSONObject(i);
                         Stadium stadium = new Stadium();
@@ -307,6 +312,7 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
                         stadium.setAdress(js.getString("adress"));
                         stadium.setNum(js.getString("num"));
                         stadium.setOpentime(js.getString("opentime"));
+                        stadium.setClosetime(js.getString("closetime"));
                         stadium.setGrade((float)js.getDouble("grade"));
                         mData.add(stadium);
                     }
@@ -319,27 +325,21 @@ public class OrderFragment extends BaseFragment implements AdapterView.OnItemCli
                         list2.add(mData.get(i).getStadiumname());
                     }
                     mContentBanner.setData(list,list2);
-                    List<Stadium> mData2 = new ArrayList<>();
-                    System.out.println("22");
-                    for(int i=0;i<mData.size();i++){
-                        Stadium stadium = new Stadium();
-                        stadium.setMainpicture(mData.get(i).getMainpicture());
-                        stadium.setAdress(mData.get(i).getAdress());
-                        stadium.setCity(mData.get(i).getCity());
-                        stadium.setAircondition(mData.get(i).getAircondition());
-                        stadium.setArea(mData.get(i).getArea());
-                        stadium.setStadiumname(mData.get(i).getStadiumname());
-                        stadium.setIndoor(mData.get(i).getIndoor());
-                        stadium.setNum(mData.get(i).getNum());
-                        stadium.setStadiumtype(mData.get(i).getStadiumtype());
-                        stadium.setStadiumId(mData.get(i).getStadiumId());
-                        stadium.setOpentime(mData.get(i).getOpentime());
-                        stadium.setGrade(mData.get(i).getGrade());
-                        mData2.add(stadium);
-                    }
+                    mContentBanner.setDelegate(new BGABanner.Delegate() {
+                        @Override
+                        public void onBannerItemClick(BGABanner banner, View itemView, @Nullable Object model, int position) {
+                            Stadium stadium = mData.get(position);
+                            Intent intent = new Intent(mContext, StadiumActivity.class);
+                            Bundle mBundle = new Bundle();
+                            mBundle.putSerializable("user", user);
+                            mBundle.putSerializable("stadium", stadium);
+                            intent.putExtras(mBundle);
+                            mContext.startActivity(intent);
+                        }
+                    });
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-                    StadiumAdapter adapter = new StadiumAdapter(mContext,mData2,user);
+                    StadiumAdapter adapter = new StadiumAdapter(mContext,mData,user);
                     recyclerView.setNestedScrollingEnabled(false);
                     recyclerView.setAdapter(adapter);
 

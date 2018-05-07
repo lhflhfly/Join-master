@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lhf.join.Adapter.StadiumAdapter;
@@ -17,6 +18,7 @@ import com.lhf.join.Bean.User;
 import com.lhf.join.R;
 import com.lhf.join.View.MainActivity;
 import com.lhf.join.View.Stadium.SearchStadiumActivity;
+import com.lhf.join.View.User.NeedInformationActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +43,7 @@ public class MyCollection extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private User user;
+    private TextView tv_nocollection;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -61,6 +64,7 @@ public class MyCollection extends AppCompatActivity {
     private void initView() {
         btn_back = findViewById(R.id.icon_back);
         recyclerView = findViewById(R.id.rv_collect);
+        tv_nocollection = findViewById(R.id.tv_nocollection);
         layoutManager = new LinearLayoutManager(this);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
     }
@@ -73,6 +77,7 @@ public class MyCollection extends AppCompatActivity {
                 finish();
             }
         });
+        tv_nocollection.setVisibility(View.GONE);
         collectedstadium(user.getUserId());
 
 
@@ -131,27 +136,12 @@ public class MyCollection extends AppCompatActivity {
                         stadium.setMainpicture(URL_PICTURE + js.getString("mainpicture"));
                         stadium.setAdress(js.getString("adress"));
                         stadium.setNum(js.getString("num"));
+                        stadium.setGrade((float)js.getDouble("grade"));
                         mData.add(stadium);
-                    }
-                    List<Stadium> mData2 = new ArrayList<>();
-                    System.out.println("22");
-                    for (int i = 0; i < mData.size(); i++) {
-                        Stadium stadium = new Stadium();
-                        stadium.setMainpicture(mData.get(i).getMainpicture());
-                        stadium.setAdress(mData.get(i).getAdress());
-                        stadium.setCity(mData.get(i).getCity());
-                        stadium.setAircondition(mData.get(i).getAircondition());
-                        stadium.setArea(mData.get(i).getArea());
-                        stadium.setStadiumname(mData.get(i).getStadiumname());
-                        stadium.setIndoor(mData.get(i).getIndoor());
-                        stadium.setNum(mData.get(i).getNum());
-                        stadium.setStadiumtype(mData.get(i).getStadiumtype());
-                        stadium.setStadiumId(mData.get(i).getStadiumId());
-                        mData2.add(stadium);
                     }
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.addItemDecoration(new DividerItemDecoration(MyCollection.this, DividerItemDecoration.VERTICAL));
-                    StadiumAdapter adapter = new StadiumAdapter(MyCollection.this, mData2, user);
+                    StadiumAdapter adapter = new StadiumAdapter(MyCollection.this, mData, user);
                     recyclerView.setNestedScrollingEnabled(false);
                     recyclerView.setAdapter(adapter);
 
@@ -167,7 +157,9 @@ public class MyCollection extends AppCompatActivity {
                 StadiumAdapter adapter = new StadiumAdapter(MyCollection.this, mData2, user);
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(adapter);
-
+                tv_nocollection.setVisibility(View.VISIBLE);
+                tv_nocollection.setText("您还没有收藏任何的场馆");
+                Toast.makeText(MyCollection.this, "您还没有收藏任何的场馆", Toast.LENGTH_SHORT).show();
             }
         }
     }
