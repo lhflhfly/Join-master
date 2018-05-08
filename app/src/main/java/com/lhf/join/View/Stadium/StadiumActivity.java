@@ -117,7 +117,7 @@ public class StadiumActivity extends AppCompatActivity {
         tv_type.setText(stadium.getStadiumtype());
         tv_area.setText(stadium.getArea() + "平方米");
         tv_num.setText(stadium.getNum() + "人");
-        tv_opentime.setText(stadium.getOpentime()+"--"+stadium.getClosetime());
+        tv_opentime.setText(stadium.getOpentime()+":00--"+stadium.getClosetime()+":00");
         ratingBar.setRating(stadium.getGrade());
         if (stadium.getIndoor() == 1) {
             tv_indoor.setText(" 是");
@@ -176,7 +176,14 @@ public class StadiumActivity extends AppCompatActivity {
         icon_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareText("分享场馆地址","123",stadium.getStadiumname()+"\n地址："+tv_adress.getText().toString());
+                String text = stadium.getStadiumname()
+                        +"\n地址："
+                        +tv_adress.getText().toString()
+                        +"\n项目："+stadium.getStadiumtype()
+                        +"\n场馆面积："+tv_area.getText().toString()
+                        +"\n营业时间："+tv_opentime.getText().toString()
+                        +"\n评分："+stadium.getGrade();
+                shareText("分享场馆","123",text);
 
             }
         });

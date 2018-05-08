@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-   <ListView
-       android:id="@+id/lv_place"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+   <LinearLayout
+       android:background="@android:color/holo_blue_dark"
+       android:layout_width="match_parent"
+       android:gravity="center"
+       android:orientation="vertical"
+       android:layout_height="50dp">
+      <TextView
+          android:text="场地列表"
+          android:textStyle="bold"
+          android:textSize="18dp"
+          android:textColor="@android:color/white"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+      <TextView
+          android:text="(显示的为没有被预约的场地)"
+          android:textColor="@android:color/white"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+   </LinearLayout>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/rv_place"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
 
-   </ListView>
+   </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

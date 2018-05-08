@@ -101,6 +101,10 @@
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 
+    <style name="ThemeDialog" parent="android:Theme.Material.Light.Dialog" type="text/css"><item name="android:colorAccent">@android:color/holo_blue_dark</item>
+        <item name="android:colorPrimary">@android:color/holo_blue_dark</item>
+        <item name="android:colorPrimaryDark">@android:color/holo_blue_dark</item></style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

@@ -23,14 +23,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lhf.join.Bean.Place;
 import com.lhf.join.Bean.Stadium;
 import com.lhf.join.Bean.User;
 import com.lhf.join.Fragment.OrderFragment;
 import com.lhf.join.R;
+import com.lhf.join.View.Find.InsertNeedActivity;
 import com.lhf.join.View.Find.SetTimeDialog;
 import com.lhf.join.View.User.LoginActivity;
 import com.lhf.join.View.User.RegisterActivity;
@@ -61,10 +64,12 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
     private TextView tv_date;
     private TextView tv_time;
     private TextView tv_place;
-    private TextView tv_userId;
+    private ImageView icon_back;
     private Button btn_submit;
     private User user;
     private Stadium stadium;
+    private Place place;
+    private String time_order;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -81,10 +86,10 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
         btn_time = findViewById(R.id.btn_time);
         btn_place = findViewById(R.id.btn_place);
         tv_date = findViewById(R.id.tv_date);
-        tv_userId = findViewById(R.id.tv_userId);
         tv_time = findViewById(R.id.tv_time);
         tv_place = findViewById(R.id.tv_place);
         btn_submit = findViewById(R.id.btn_submit);
+        icon_back = findViewById(R.id.icon_back);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
 
@@ -92,13 +97,17 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
 
     private void initData() {
         user = (User) getIntent().getSerializableExtra("user");
-        tv_userId.setText("userID:" + user.getUserId());
+        icon_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         stadium = (Stadium) getIntent().getSerializableExtra("stadium");
         btn_date.setOnClickListener(this);
         btn_time.setOnClickListener(this);
         btn_place.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
-
 
     }
 
@@ -106,15 +115,17 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
         SetDateDialog sdt = new SetDateDialog();
         sdt.setTV(tv_date);
         sdt.show(getSupportFragmentManager(), "datePicker");
+        time_order = tv_date.getText().toString() + tv_time.getText().toString();
     }
 
     public void setTimeClick(View v) {
         SetTimeDialog std = new SetTimeDialog(stadium);
         std.show(getSupportFragmentManager(), "timePicker");
+
     }
 
     public void setPlaceClick(View v) {
-        SetPlaceDialog std = new SetPlaceDialog(stadium);
+        SetPlaceDialog std = new SetPlaceDialog(stadium,time_order);
         std.show(getSupportFragmentManager(), "adaPicker");
     }
 
@@ -128,15 +139,19 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
                 setTimeClick(v);
                 break;
             case R.id.btn_place:
-                setPlaceClick(v);
+                if("".equals(tv_time.getText().toString())&&"".equals(tv_date.getText().toString())){
+                    Toast.makeText(OrderStadiumActivity.this,"请先选择日期和时间",Toast.LENGTH_SHORT).show();
+                }else {
+                    setPlaceClick(v);
+                }
                 break;
             case R.id.btn_submit:
-                if (!"日期".equals(tv_date.getText().toString()) && !"时间".equals(tv_time.getText().toString()) && !"场地".equals(tv_place.getText().toString())) {
+                if (!"".equals(tv_date.getText().toString()) && !"".equals(tv_time.getText().toString()) && !"".equals(tv_place.getText().toString())) {
                     Calendar c = Calendar.getInstance();
                     String time = c.get(Calendar.YEAR) + "年" + (c.get(Calendar.MONTH) + 1) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日";
-                    String time_order = tv_date.getText().toString() + tv_time.getText().toString();
+                    time_order = tv_date.getText().toString() + tv_time.getText().toString();
 
-                    OrderStadium(user.getUserId(), stadium.getStadiumId(), time, time_order, tv_place.getText().toString(), user.getTel());
+                    OrderStadium(user.getUserId(), stadium.getStadiumId(), time, time_order, String.valueOf(place.getPlaceId()), user.getTel());
 
 
                 } else {
@@ -153,6 +168,17 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onSetNumLComplete(String time) {
         tv_time.setText(time);
+        time_order = tv_date.getText().toString() + tv_time.getText().toString();
+    }
+
+    @Override
+    public void onSetPlaceComplete(Place place_set) {
+        if (place_set == null) {
+            Toast.makeText(OrderStadiumActivity.this, "没有选场地", Toast.LENGTH_SHORT).show();
+        } else {
+            place = place_set;
+            tv_place.setText(place_set.getPlacename());
+        }
     }
 
     private class OrderStadiumAsyncTask extends AsyncTask<String, Integer, String> {
@@ -166,7 +192,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
                 json.put("stadiumId", params[2]);
                 json.put("time", params[3]);
                 json.put("time_order", params[4]);
-                json.put("placename", params[5]);
+                json.put("placeId", params[5]);
                 json.put("tel", params[6]);
                 OkHttpClient okHttpClient = new OkHttpClient();
                 RequestBody requestBody = RequestBody.create(JSON, String.valueOf(json));
@@ -194,6 +220,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
                     String loginresult = results.getString("result");
                     if (loginresult.equals("1")) {
                         Toast.makeText(OrderStadiumActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
                         Toast.makeText(OrderStadiumActivity.this, "预约失败，请重试", Toast.LENGTH_SHORT).show();
                     }
@@ -205,12 +232,6 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
             }
         }
     }
-
-    @Override
-    public void onSetPlaceComplete(String place1) {
-        tv_place.setText(place1);
-    }
-
 
     @SuppressLint("ValidFragment")
     public static class SetDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
@@ -227,7 +248,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(), this, year, month, day);
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),R.style.ThemeDialog, this, year, month, day);
             dpd.getDatePicker().setMinDate((new Date()).getTime());
             dpd.getDatePicker().setMaxDate(new Date().getTime() + 3 * 24 * 60 * 60 * 1000);
             return dpd;
