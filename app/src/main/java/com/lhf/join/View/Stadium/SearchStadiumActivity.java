@@ -177,6 +177,7 @@ public class SearchStadiumActivity extends AppCompatActivity {
                         stadium.setOpentime(js.getString("opentime"));
                         stadium.setClosetime(js.getString("closetime"));
                         stadium.setGrade((float)js.getDouble("grade"));
+                        stadium.setIconnum(js.getInt("iconnum"));
                         mData.add(stadium);
                     }
                     recyclerView.setLayoutManager(layoutManager);

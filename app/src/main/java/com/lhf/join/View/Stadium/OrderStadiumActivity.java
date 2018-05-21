@@ -57,7 +57,7 @@ import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_ORDERSTADIUM;
 
-public class OrderStadiumActivity extends AppCompatActivity implements View.OnClickListener, SetPlaceDialog.SetPlaceListener,SetTimeDialog.SetTimeListener {
+public class OrderStadiumActivity extends AppCompatActivity implements View.OnClickListener, SetPlaceDialog.SetPlaceListener, SetTimeDialog.SetTimeListener {
     private Button btn_date;
     private Button btn_time;
     private Button btn_place;
@@ -119,13 +119,13 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void setTimeClick(View v) {
-        SetTimeDialog std = new SetTimeDialog(stadium);
+        SetTimeDialog std = new SetTimeDialog(stadium, tv_date.getText().toString());
         std.show(getSupportFragmentManager(), "timePicker");
 
     }
 
     public void setPlaceClick(View v) {
-        SetPlaceDialog std = new SetPlaceDialog(stadium,time_order);
+        SetPlaceDialog std = new SetPlaceDialog(stadium, time_order);
         std.show(getSupportFragmentManager(), "adaPicker");
     }
 
@@ -136,12 +136,30 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
                 setDateClick(v);
                 break;
             case R.id.btn_time:
-                setTimeClick(v);
+                if ("".equals(tv_date.getText().toString())) {
+                    Toast.makeText(OrderStadiumActivity.this, "请先选择日期", Toast.LENGTH_SHORT).show();
+                } else {
+                    Calendar calendar = Calendar.getInstance();
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH);
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    String this_day = (year + "年" + (month + 1) + "月" + day + "日");
+                    if (this_day.equals(tv_date.getText().toString())) {
+                        int time_this = calendar.get(Calendar.HOUR_OF_DAY);
+                        if (time_this > Integer.parseInt(stadium.getClosetime())) {
+                            Toast.makeText(OrderStadiumActivity.this, "该场馆今日已休息，请选择其他日期", Toast.LENGTH_SHORT).show();
+                        } else {
+                            setTimeClick(v);
+                        }
+                    } else {
+                        setTimeClick(v);
+                    }
+                }
                 break;
             case R.id.btn_place:
-                if("".equals(tv_time.getText().toString())&&"".equals(tv_date.getText().toString())){
-                    Toast.makeText(OrderStadiumActivity.this,"请先选择日期和时间",Toast.LENGTH_SHORT).show();
-                }else {
+                if ("".equals(tv_time.getText().toString()) || "".equals(tv_date.getText().toString())) {
+                    Toast.makeText(OrderStadiumActivity.this, "请先选择日期和时间", Toast.LENGTH_SHORT).show();
+                } else {
                     setPlaceClick(v);
                 }
                 break;
@@ -248,7 +266,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(),R.style.ThemeDialog, this, year, month, day);
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(), R.style.ThemeDialog, this, year, month, day);
             dpd.getDatePicker().setMinDate((new Date()).getTime());
             dpd.getDatePicker().setMaxDate(new Date().getTime() + 3 * 24 * 60 * 60 * 1000);
             return dpd;

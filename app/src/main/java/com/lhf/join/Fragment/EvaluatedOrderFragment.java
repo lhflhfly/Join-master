@@ -104,9 +104,10 @@ public class EvaluatedOrderFragment extends BaseFragment{
             if (!"null".equals(s)) {
                 try {
                     JSONArray results = new JSONArray(s);
-                    for (int i = 0; i < results.length(); i++) {
+                    for (int i=results.length()-1;i>=0;i--) {
                         JSONObject js = results.getJSONObject(i);
                         Book book = new Book();
+                        book.setUserId(user.getUserId());
                         book.setBookingId(js.getInt("bookingId"));
                         book.setStadiumname(js.getString("stadiumname"));
                         book.setPlaceName(js.getString("placename"));

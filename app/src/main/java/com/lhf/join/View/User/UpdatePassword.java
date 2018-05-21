@@ -1,6 +1,7 @@
 package com.lhf.join.View.User;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class UpdatePassword extends AppCompatActivity {
         et_confire_password_new = findViewById(R.id.et_confire_password_new);
         btn_submit = findViewById(R.id.btn_submit);
         icon_back = findViewById(R.id.icon_back);
+        getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
     }
 

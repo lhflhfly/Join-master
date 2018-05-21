@@ -16,6 +16,7 @@ public class Stadium implements Serializable {
     private String opentime;
     private String closetime;
     private Float grade;
+    private int iconnum;
 
     public Stadium(String mainpicture, String stadiumname, String stadiumtype, String adress) {
         this.stadiumname = stadiumname;
@@ -25,6 +26,14 @@ public class Stadium implements Serializable {
     }
 
     public Stadium() {
+    }
+
+    public int getIconnum() {
+        return iconnum;
+    }
+
+    public void setIconnum(int iconnum) {
+        this.iconnum = iconnum;
     }
 
     public String getClosetime() {

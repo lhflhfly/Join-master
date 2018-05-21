@@ -1,11 +1,13 @@
 package com.lhf.join.Fragment;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,6 +56,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout btn_joinedneed;
     private LinearLayout btn_evaluate;
     private String userId;
+    private ProgressDialog progressDialog1;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
 
@@ -99,7 +102,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         RefrshUser(userId);
 
 
-
     }
 
     private void RefrshUser(String userId) {
@@ -134,6 +136,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             }
             return results;
         }
+
 
         @Override
         protected void onPostExecute(String s) {

@@ -18,6 +18,7 @@ import com.lhf.join.R;
 import com.lhf.join.View.EasyPickerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import okhttp3.MediaType;
 
@@ -30,9 +31,11 @@ public class SetTimeDialog extends DialogFragment{
     private String time;
     private String hour;
     private Stadium mStadium;
+    private String mDay;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
-    public SetTimeDialog(Stadium stadium){
+    public SetTimeDialog(Stadium stadium,String day){
         this.mStadium = stadium;
+        this.mDay = day;
     }
 
     @Nullable
@@ -65,9 +68,33 @@ public class SetTimeDialog extends DialogFragment{
 
     private void initTime() {
         final ArrayList<String> numList = new ArrayList<>();
-        for (int i=Integer.parseInt(mStadium.getOpentime());i<=Integer.parseInt(mStadium.getClosetime());i=i+2){
-             numList.add(String.valueOf(i)+":00--"+String.valueOf(i+1)+":00");
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String this_day = (year + "年" + (month + 1) + "月" + day + "日");
+        int i1=0;
+        if(this_day.equals(mDay)){
+            int time_this=calendar.get(Calendar.HOUR_OF_DAY);
+            if(time_this<Integer.parseInt(mStadium.getOpentime())){
+                i1 = Integer.parseInt(mStadium.getOpentime());
+            }else {
+                i1 = time_this+1;
+            }
+            if(time_this>Integer.parseInt(mStadium.getClosetime())){
+                numList.add("该场馆今日已休息");
+            }else{
+            for (int i=i1;i<Integer.parseInt(mStadium.getClosetime());i=i+1){
+                numList.add(String.valueOf(i)+":00--"+String.valueOf(i+1)+":00");
+            }
+            }
+        }else {
+            i1 = Integer.parseInt(mStadium.getOpentime());
+            for (int i=i1;i<Integer.parseInt(mStadium.getClosetime());i=i+1){
+                numList.add(String.valueOf(i)+":00--"+String.valueOf(i+1)+":00");
+            }
         }
+
         easyPickerView_h.setDataList(numList);
         easyPickerView_h.setOnScrollChangedListener(new EasyPickerView.OnScrollChangedListener() {
             @Override

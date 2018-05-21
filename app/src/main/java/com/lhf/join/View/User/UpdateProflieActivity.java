@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lhf.join.Bean.User;
@@ -35,8 +37,10 @@ import okhttp3.Request;
 public class UpdateProflieActivity extends AppCompatActivity {
     private Button btn;
     private Button btn_xuanze;
-    private String path;
+    private String path = null;
     private User user;
+    private TextView tv_progress;
+    private ImageView icon_back;
     private ImageView icon_choice;
     private ProgressBar progressBar;
 
@@ -44,16 +48,32 @@ public class UpdateProflieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updateproflie);
+        initView();
+        initData();
+    }
+
+    private void initView() {
         btn = findViewById(R.id.btn);
         btn_xuanze = findViewById(R.id.btn_xuancze);
+        tv_progress = findViewById(R.id.tv_progress);
+        icon_back = findViewById(R.id.icon_back);
+        tv_progress.setVisibility(View.GONE);
         icon_choice = findViewById(R.id.icon_choice);
         progressBar = findViewById(R.id.progress);
+        getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
+    }
+
+    private void initData() {
+        progressBar.setVisibility(View.GONE);
         user = (User) getIntent().getSerializableExtra("user");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                multiFileUpload();
-
+                if(path==null){
+                    Toast.makeText(UpdateProflieActivity.this,"请先选择图片",Toast.LENGTH_SHORT).show();
+                }else {
+                    multiFileUpload();
+                }
             }
         });
         btn_xuanze.setOnClickListener(new View.OnClickListener() {
@@ -65,26 +85,36 @@ public class UpdateProflieActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+        icon_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==1)
-        {
-            //获得图片的uri
-            Uri uri = data.getData();
-            //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
-            ContentResolver cr = this.getContentResolver();
-            Bitmap bitmap;
-            //Bitmap bm; //这是一种方式去读取图片
-            try
+        if(data==null){
+            Toast.makeText(UpdateProflieActivity.this,"没有选择图片",Toast.LENGTH_SHORT).show();
+        }else{
+            if(requestCode==1)
             {
-                //bm = MediaStore.Images.Media.getBitmap(cr, uri);
-                //pic.setImageBitmap(bm);
-                bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                System.out.println("GOOD");
-                //第一种方式去读取路径
-                //String[] proj = {MediaStore.Images.Media.DATA};
+                //获得图片的uri
+                Uri uri = data.getData();
+                //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
+                ContentResolver cr = this.getContentResolver();
+                Bitmap bitmap;
+                //Bitmap bm; //这是一种方式去读取图片
+                try
+                {
+                    //bm = MediaStore.Images.Media.getBitmap(cr, uri);
+                    //pic.setImageBitmap(bm);
+                    bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                    System.out.println("GOOD");
+                    //第一种方式去读取路径
+                    //String[] proj = {MediaStore.Images.Media.DATA};
                 /*
                  //好像是android多媒体数据库的封装接口，具体的看Android文档
                 Cursor cursor = managedQuery(uri, proj, null, null, null);
@@ -96,22 +126,24 @@ public class UpdateProflieActivity extends AppCompatActivity {
                 String path = cursor.getString(column_index);
                 System.out.println(path);
                    */
-                icon_choice.setImageBitmap(bitmap);
-                //第二种方式去读取路径
-                Cursor cursor =this.getContentResolver().query(uri, null, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                path = cursor.getString(column_index);
-                System.out.println(path);
-            }
-            catch (Exception e)
-            {
-                // TODO 自动生成的 catch 块
-                e.printStackTrace();
-                System.out.println("BAD");
-            }
+                    icon_choice.setImageBitmap(bitmap);
+                    //第二种方式去读取路径
+                    Cursor cursor =this.getContentResolver().query(uri, null, null, null, null);
+                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    cursor.moveToFirst();
+                    path = cursor.getString(column_index);
+                    System.out.println(path);
+                }
+                catch (Exception e)
+                {
+                    // TODO 自动生成的 catch 块
+                    e.printStackTrace();
+                    System.out.println("BAD");
+                }
 
+            }
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -144,6 +176,8 @@ public class UpdateProflieActivity extends AppCompatActivity {
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
+                tv_progress.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 progressBar.setMax((int)total);
                 progressBar.setProgress((int)current);
 
@@ -151,6 +185,8 @@ public class UpdateProflieActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(String result) {
+                progressBar.setVisibility(View.GONE);
+                tv_progress.setVisibility(View.GONE);
                 Toast.makeText(UpdateProflieActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
 
             }

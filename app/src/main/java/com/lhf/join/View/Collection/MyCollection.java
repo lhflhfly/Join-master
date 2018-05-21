@@ -135,8 +135,11 @@ public class MyCollection extends AppCompatActivity {
                         stadium.setCity(js.getString("city"));
                         stadium.setMainpicture(URL_PICTURE + js.getString("mainpicture"));
                         stadium.setAdress(js.getString("adress"));
+                        stadium.setOpentime(js.getString("opentime"));
+                        stadium.setClosetime(js.getString("closetime"));
                         stadium.setNum(js.getString("num"));
                         stadium.setGrade((float)js.getDouble("grade"));
+                        stadium.setIconnum(js.getInt("iconnum"));
                         mData.add(stadium);
                     }
                     recyclerView.setLayoutManager(layoutManager);

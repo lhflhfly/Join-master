@@ -1,5 +1,6 @@
 package com.lhf.join.View.Find;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,6 +71,7 @@ public class FindActivity extends AppCompatActivity {
         btn_join =findViewById(R.id.btn_join);
         icon_back= findViewById(R.id.icon_back);
         user_proflie= findViewById(R.id.user_proflie);
+        getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
     }
 
     private void initData() {

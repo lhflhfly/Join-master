@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.lhf.join.Bean.Need;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +36,7 @@ public class JoinedNeedActivity extends AppCompatActivity {
     private TextView tv_stadiumname;
     private TextView tv_time;
     private TextView tv_num;
+    private ImageView proflie;
     private TextView tv_num_join;
     private TextView tv_remark;
     private Button btn_exit;
@@ -51,6 +55,7 @@ public class JoinedNeedActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
         tv_username = findViewById(R.id.tv_username);
         tv_stadiumname = findViewById(R.id.tv_stadiumname);
         tv_time = findViewById(R.id.tv_time);
@@ -59,6 +64,7 @@ public class JoinedNeedActivity extends AppCompatActivity {
         tv_remark = findViewById(R.id.tv_remark);
         btn_exit =findViewById(R.id.btn_join);
         icon_back= findViewById(R.id.icon_back);
+        proflie = findViewById(R.id.proflie);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
     }
 
@@ -83,6 +89,16 @@ public class JoinedNeedActivity extends AppCompatActivity {
                 findJoin(user.getUserId(),need.getNeedId());
             }
         });
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(configuration);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnLoading(R.drawable.loading)
+                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
+                .delayBeforeLoading(100)  // 下载前的延迟时间
+                .build();
+        ImageLoader.getInstance().displayImage(need.getProflie(),proflie,options);
+
 
 
     }

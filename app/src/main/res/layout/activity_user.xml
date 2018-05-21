@@ -3,33 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
-        android:background="@android:color/holo_blue_dark"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center">
+
         <ImageView
             android:id="@+id/icon_back"
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:layout_gravity="center"
             android:src="@drawable/back" />
+
         <TextView
             style="@style/title"
-            android:text="个人信息"
-            />
+            android:text="个人信息" />
 
     </LinearLayout>
+
     <LinearLayout
-        android:showDividers="middle|end"
-        android:orientation="vertical"
-        android:divider="@drawable/line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:divider="@drawable/line"
+        android:orientation="vertical"
+        android:showDividers="middle|end">
+
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="头像:" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6">
+
+                <ImageView
+                    android:id="@+id/proflie"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/me" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_proflie"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/update" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center">
 
             <TextView
@@ -43,9 +81,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center">
 
             <TextView
@@ -59,9 +97,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center">
 
             <TextView
@@ -75,9 +113,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center">
 
             <TextView
@@ -91,31 +129,33 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/btn_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="修改信息" />
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="#D6029ACC"
+            android:text="修改信息"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btn_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="修改密码" />
-        <Button
-            android:id="@+id/btn_proflie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="修改头像" />
-
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="#D6029ACC"
+            android:text="修改密码"
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

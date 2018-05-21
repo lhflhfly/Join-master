@@ -6,7 +6,10 @@
     android:orientation="vertical">
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/btn_confirm"
+        android:background="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit" />
@@ -23,12 +26,12 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             custom:epvMaxShowNum="3"
-            custom:epvRecycleMode="true"
-            custom:epvTextColor="#4aa4a4"
+            custom:epvRecycleMode="false"
+            custom:epvTextColor="#ea8643"
             custom:epvTextMaxScale="2.0"
             custom:epvTextMinAlpha="0.35"
             custom:epvTextPadding="10dp"
-            custom:epvTextSize="30sp" />
+            custom:epvTextSize="20sp" />
 
 
     </LinearLayout>

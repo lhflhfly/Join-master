@@ -19,6 +19,7 @@ public class Constant {
     public static String URL_SELECTUSERBYUSERID = URL+"SelectUserByUserId_Servlet";
     public static String URL_LOADINGORDER = URL+"LoadingOrder_Servlet";
     public static String URL_PICTURE = URL+"Image/";
+    public static String URL_SPORTSTYPE = URL+"SportsIcon/";
     public static String URL_PROFLIE = URL+"Proflie/";
     public static String URL_NOTICE = URL+"Notice_Servlet";
     public static String URL_SEARCHSTADIUM = URL+"SearchStadiumByName_Servlet";
@@ -41,4 +42,8 @@ public class Constant {
     public static String URL_DELETEJOINFIND = URL+"DeleteJoinFind_Servlet";
     public static String URL_EVALUATESTADIUM = URL+"EvaluateStadium_Servlet";
     public static String URL_SELECTEVALUATION = URL+"SelectEvaluation_Servlet";
+    public static String URL_SPORTS = URL+"LoadingSports_Servlet";
+    public static String URL_CITY = URL+"LoadingCity_Servlet";
+    public static String URL_LOADINGICON = URL+"LoadingIcon_Servlet";
+    public static String URL_GETEVALUATEINFORMATION = URL+"GetEvaluateInformation_Servlet";
 }

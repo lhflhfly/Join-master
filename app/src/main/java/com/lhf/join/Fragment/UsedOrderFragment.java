@@ -103,7 +103,7 @@ public class UsedOrderFragment extends BaseFragment{
             if (!"null".equals(s)) {
                 try {
                     JSONArray results = new JSONArray(s);
-                    for (int i = 0; i < results.length(); i++) {
+                    for (int i=results.length()-1;i>=0;i--) {
                         JSONObject js = results.getJSONObject(i);
                         Book book = new Book();
                         book.setBookingId(js.getInt("bookingId"));

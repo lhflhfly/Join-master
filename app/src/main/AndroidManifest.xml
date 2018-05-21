@@ -63,7 +63,8 @@
         <activity android:name=".View.User.UpdateProflieActivity" />
         <activity android:name=".View.Stadium.EvaluateActivity" />
         <activity android:name=".View.User.EvaluateInformationActivity" />
-        <activity android:name=".View.User.MyEvaluation"></activity>
+        <activity android:name=".View.User.MyEvaluation" />
+        <activity android:name=".View.Stadium.StadiumIconActivity"></activity>
     </application>
 
 </manifest>

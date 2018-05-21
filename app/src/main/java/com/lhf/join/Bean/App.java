@@ -1,19 +1,21 @@
 package com.lhf.join.Bean;
 
 public class App {
-    private int icon;
+    private String icon;
     private String name;
+    public App(){
+    }
 
-    public App(int icon, String name) {
+    public App(String icon, String name) {
         this.icon = icon;
         this.name = name;
     }
 
-    public int getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

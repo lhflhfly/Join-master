@@ -100,7 +100,7 @@ public class InsertNeedActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void setTimeClick(View v) {
-        SetTimeDialog std = new SetTimeDialog(stadium_set);
+        SetTimeDialog std = new SetTimeDialog(stadium_set,tv_date.getText().toString());
         std.show(getSupportFragmentManager(), "timePicker");
     }
 
@@ -243,7 +243,7 @@ public class InsertNeedActivity extends AppCompatActivity implements View.OnClic
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(), this, year, month, day);
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),R.style.ThemeDialog, this, year, month, day);
             dpd.getDatePicker().setMinDate((new Date()).getTime());
             dpd.getDatePicker().setMaxDate(new Date().getTime() + 3 * 24 * 60 * 60 * 1000);
             return dpd;

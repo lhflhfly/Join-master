@@ -18,22 +18,27 @@
         </cn.bingoogolapple.bgabanner.BGABanner>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/lout2"
         android:background="@drawable/bggirdview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/lout1">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v4.view.ViewPager>
+        <LinearLayout
+            android:id="@+id/points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
 
-            <GridView
-                android:id="@+id/gv1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lout1"
-                android:numColumns="4">
-            </GridView>
+            android:gravity="center"
+            android:orientation="horizontal" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     <View
@@ -135,8 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lout4">
-
-    </android.support.v7.widget.RecyclerView>
+    </android.support.v7.widget.RecyclerView>>
 
 
 </RelativeLayout>

@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +20,9 @@ import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.lhf.join.Adapter.EvaluatonAdapter;
 import com.lhf.join.Adapter.StadiumAdapter;
+import com.lhf.join.Bean.Evaluation;
 import com.lhf.join.Bean.Stadium;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
@@ -44,9 +48,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_DELETECOLLECTION;
+import static com.lhf.join.Constant.Constant.URL_GETEVALUATEINFORMATION;
 import static com.lhf.join.Constant.Constant.URL_INSERTCOLLECTION;
 import static com.lhf.join.Constant.Constant.URL_ISCOLLECTED;
 import static com.lhf.join.Constant.Constant.URL_PICTURE;
+import static com.lhf.join.Constant.Constant.URL_PROFLIE;
 import static com.lhf.join.Constant.Constant.URL_SEARCHSTADIUM;
 
 public class StadiumActivity extends AppCompatActivity {
@@ -59,6 +65,9 @@ public class StadiumActivity extends AppCompatActivity {
     private TextView tv_aircondition;
     private TextView tv_adress;
     private TextView tv_opentime;
+    private TextView tv_evaluation;
+    private TextView tv_noevaluation;
+    private TextView tv_iconnum;
     private Stadium stadium;
     private ImageView icon_back;
     private ImageView icon_share;
@@ -69,6 +78,7 @@ public class StadiumActivity extends AppCompatActivity {
     private boolean firstcollect = true;
     private boolean firstcollect2 = true;
     private ToggleButton shineButton;
+    private RecyclerView recyclerView;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -78,6 +88,7 @@ public class StadiumActivity extends AppCompatActivity {
         stadium = (Stadium) getIntent().getSerializableExtra("stadium");
         initview();
         initdata();
+
 
 
     }
@@ -98,6 +109,11 @@ public class StadiumActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratbar);
         btn_order = findViewById(R.id.btn_order);
         shineButton = findViewById(R.id.po_image3);
+        tv_evaluation = findViewById(R.id.tv);
+        tv_iconnum = findViewById(R.id.tv_count);
+        recyclerView = findViewById(R.id.rv_evaluation);
+        tv_noevaluation = findViewById(R.id.tv_noevaluation);
+
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
     }
@@ -115,10 +131,21 @@ public class StadiumActivity extends AppCompatActivity {
         tv.setText(stadium.getStadiumname());
         tv_stadiumname.setText(stadium.getStadiumname());
         tv_type.setText(stadium.getStadiumtype());
+        tv_iconnum.setText(String.valueOf(stadium.getIconnum()));
         tv_area.setText(stadium.getArea() + "平方米");
         tv_num.setText(stadium.getNum() + "人");
         tv_opentime.setText(stadium.getOpentime()+":00--"+stadium.getClosetime()+":00");
         ratingBar.setRating(stadium.getGrade());
+        icon_stadium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StadiumActivity.this, StadiumIconActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("stadium", stadium);
+                intent.putExtras(mBundle);
+                startActivity(intent);
+            }
+        });
         if (stadium.getIndoor() == 1) {
             tv_indoor.setText(" 是");
         } else {
@@ -187,6 +214,7 @@ public class StadiumActivity extends AppCompatActivity {
 
             }
         });
+        loadingEvaluation(stadium.getStadiumId());
 
 
     }
@@ -304,6 +332,81 @@ public class StadiumActivity extends AppCompatActivity {
                 }
             } else {
                 System.out.println("结果为空");
+            }
+        }
+    }
+
+    private void loadingEvaluation(int stadiunmId) {
+        String SearchUrl = URL_GETEVALUATEINFORMATION;
+        new loadingEvaluationAsyncTask().execute(SearchUrl, String.valueOf(stadiunmId));
+    }
+
+    private class loadingEvaluationAsyncTask extends AsyncTask<String, Integer, String> {
+        public loadingEvaluationAsyncTask() {
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Response response = null;
+            String results = null;
+            JSONObject json = new JSONObject();
+            try {
+                json.put("stadiumId", params[1]);
+                OkHttpClient okHttpClient = new OkHttpClient();
+                RequestBody requestBody = RequestBody.create(JSON, String.valueOf(json));
+                Request request = new Request.Builder()
+                        .url(params[0])
+                        .post(requestBody)
+                        .build();
+                response = okHttpClient.newCall(request).execute();
+                results = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return results;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            System.out.println("返回的数据：" + s);
+            List<Evaluation> mData = new ArrayList<>();
+            if (!"null".equals(s)) {
+                try {
+                    JSONArray results = new JSONArray(s);
+                    //循环拿出接受的数据并赋值给stadium对象
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject js = results.getJSONObject(i);
+                        Evaluation evaluation = new Evaluation();
+                        evaluation.setUsername(js.getString("username"));
+                        evaluation.setContent(js.getString("content"));
+                        evaluation.setIcon(URL_PROFLIE+js.getString("proflie"));
+                        evaluation.setGrade(js.getDouble("grade"));
+                        mData.add(evaluation);
+                    }
+                    tv_evaluation.setText("--用户评论("+results.length()+")--");
+                    EvaluatonAdapter adapter = new EvaluatonAdapter(StadiumActivity.this,mData);
+                    recyclerView.setNestedScrollingEnabled(false);
+                    StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(staggeredGridLayoutManager);
+                    recyclerView.addItemDecoration(new DividerItemDecoration(StadiumActivity.this, DividerItemDecoration.VERTICAL));
+                    recyclerView.setAdapter(adapter);
+
+
+            } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                System.out.println("结果为空");
+                List<Evaluation> mData2 = new ArrayList<>();
+                tv_evaluation.setText("--用户评论("+mData2.size()+")--");
+                tv_noevaluation.setVisibility(View.VISIBLE);
+                recyclerView.addItemDecoration(new DividerItemDecoration(StadiumActivity.this, DividerItemDecoration.VERTICAL));
+                EvaluatonAdapter adapter = new EvaluatonAdapter(StadiumActivity.this, mData2);
+                recyclerView.setNestedScrollingEnabled(false);
+                recyclerView.setAdapter(adapter);
+                Toast.makeText(StadiumActivity.this, "该场馆暂无评论", Toast.LENGTH_SHORT).show();
             }
         }
     }

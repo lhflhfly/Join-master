@@ -1,5 +1,6 @@
 package com.lhf.join.View.User;
 
+import android.app.admin.SystemUpdateInfo;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +30,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.lhf.join.Constant.Constant.URL_PROFLIE;
 import static com.lhf.join.Constant.Constant.URL_SELECTUSERBYUSERID;
 
 public class UserInformationActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,9 +41,10 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
     private TextView tv_tel;
     private User user;
     private ImageView icon_back;
+    private ImageView userproflie;
     private Button btn_update;
     private Button btn_password;
-    private Button btn_proflie;
+    private ImageView btn_proflie;
     private String userId;
 
 
@@ -69,6 +75,7 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
         btn_password = findViewById(R.id.btn_password);
         btn_proflie = findViewById(R.id.btn_proflie);
         icon_back = findViewById(R.id.icon_back);
+        userproflie = findViewById(R.id.proflie);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
 
@@ -147,10 +154,21 @@ public class UserInformationActivity extends AppCompatActivity implements View.O
                         user.setSex(results.getString("sex"));
                         user.setTel(results.getString("tel"));
                         user.setMyright(results.getString("myRight"));
+                        user.setProflie(URL_PROFLIE+results.getString("proflie"));
                         tv_username.setText(user.getUsername());
                         tv_realname.setText(user.getRealname());
                         tv_sex.setText(user.getSex());
                         tv_tel.setText(user.getTel());
+                        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(UserInformationActivity.this);
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        ImageLoader.getInstance().init(configuration);
+                        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                                .showImageOnFail(R.drawable.me) // 设置图片加载或解码过程中发生错误显示的图片
+                                .showImageOnLoading(R.drawable.loading)
+                                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
+                                .delayBeforeLoading(0)  // 下载前的延迟时间
+                                .build();
+                        ImageLoader.getInstance().displayImage(user.getProflie(), userproflie, options);
                     } else {
                     }
                 } catch (JSONException e) {

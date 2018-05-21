@@ -8,29 +8,77 @@
     tools:context=".View.User.UpdateProflieActivity">
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/icon_back"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_gravity="center"
+            android:src="@drawable/back" />
+
+        <TextView
+            style="@style/title"
+            android:text="上传头像" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择的图片："/>
+
+        <ImageView
+            android:background="@android:color/white"
+            android:id="@+id/icon_choice"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进度："/>
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:background="@android:color/holo_blue_dark"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:id="@+id/btn_xuancze"
             android:text="选择图片"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/icon_choice"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
-
         <Button
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:id="@+id/btn"
             android:text="上传"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_marginTop="10dp"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

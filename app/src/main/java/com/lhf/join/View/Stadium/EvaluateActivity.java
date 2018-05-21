@@ -86,15 +86,15 @@ public class EvaluateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 grade = (double) ratingBar.getRating();
                 String content = et_content.getText().toString();
-                EvaluateStadium(book.getStadiumId(),grade,book.getBookingId(),content);
+                EvaluateStadium(book.getStadiumId(),grade,book.getBookingId(),content,book.getUserId());
 
             }
         });
     }
 
-    private void EvaluateStadium(int stadiumId, double grade ,int bookingid,String content) {
+    private void EvaluateStadium(int stadiumId, double grade ,int bookingid,String content,int userId) {
         String orderURL = URL_EVALUATESTADIUM;
-        new EvaluateStadiumAsyncTask().execute(orderURL,String.valueOf(stadiumId), String.valueOf(grade), String.valueOf(bookingid),content);
+        new EvaluateStadiumAsyncTask().execute(orderURL,String.valueOf(stadiumId), String.valueOf(grade), String.valueOf(bookingid),content,String.valueOf(userId));
     }
 
     private class EvaluateStadiumAsyncTask extends AsyncTask<String, Integer, String> {
@@ -108,6 +108,7 @@ public class EvaluateActivity extends AppCompatActivity {
                 json.put("grade",params[2]);
                 json.put("bookingId",params[3]);
                 json.put("content",params[4]);
+                json.put("userId",params[5]);
                 OkHttpClient okHttpClient = new OkHttpClient();
                 RequestBody requestBody = RequestBody.create(JSON, String.valueOf(json));
                 Request request = new Request.Builder()

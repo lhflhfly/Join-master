@@ -36,6 +36,7 @@ import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_FINDINFORMATION;
 import static com.lhf.join.Constant.Constant.URL_PICTURE;
+import static com.lhf.join.Constant.Constant.URL_PROFLIE;
 import static com.lhf.join.Constant.Constant.URL_SEARCHCOLLECTSTADIUM;
 
 public class MyJoinNeedActivity extends AppCompatActivity {
@@ -133,6 +134,7 @@ public class MyJoinNeedActivity extends AppCompatActivity {
                         need.setNum(js.getInt("num"));
                         need.setNum_join(js.getInt("num_join"));
                         need.setRemark(js.getString("remark"));
+                        need.setProflie(URL_PROFLIE+js.optString("userproflie"));
                         mData.add(need);
                     }
                     recyclerView.setLayoutManager(layoutManager);
