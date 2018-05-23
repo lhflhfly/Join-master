@@ -1,6 +1,5 @@
 package com.lhf.join.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lhf.join.Bean.Stadium;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
@@ -22,7 +19,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class StadiumAdapter extends RecyclerView.Adapter<StadiumAdapter.ViewHolder> {
@@ -57,7 +53,7 @@ public class StadiumAdapter extends RecyclerView.Adapter<StadiumAdapter.ViewHold
 
     @Override
     public StadiumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_changguan, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_stadium, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.stadiumView.setOnClickListener(new View.OnClickListener() {
             @Override

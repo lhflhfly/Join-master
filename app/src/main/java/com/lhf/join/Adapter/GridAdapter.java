@@ -1,10 +1,6 @@
 package com.lhf.join.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,12 +10,10 @@ import android.widget.TextView;
 import com.lhf.join.Bean.App;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
-import com.lhf.join.View.Stadium.SearchStadiumActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -58,7 +52,7 @@ public class GridAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = View.inflate(mContext,R.layout.list_app,null);
+            convertView = View.inflate(mContext,R.layout.item_app,null);
             holder.tv_name = convertView.findViewById(R.id.name);
             holder.iv_nul = convertView.findViewById(R.id.img_icon);
             convertView.setTag(holder);

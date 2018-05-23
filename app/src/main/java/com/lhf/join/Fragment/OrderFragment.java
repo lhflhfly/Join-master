@@ -259,7 +259,7 @@ public class OrderFragment extends BaseFragment {
                         Stadium stadium = new Stadium();
                         stadium.setStadiumId(js.getInt("stadiumId"));
                         stadium.setStadiumname(js.getString("stadiumname"));
-                        stadium.setStadiumtype(js.getString("stadiumtypeId"));
+                        stadium.setStadiumtype(js.getString("stadiumtypename"));
                         stadium.setArea(js.getString("area"));
                         stadium.setIndoor(js.getInt("indoor"));
                         stadium.setAircondition(js.getInt("aircondition"));

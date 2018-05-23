@@ -3,8 +3,10 @@ package com.lhf.join.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.lhf.join.Bean.Book;
 import com.lhf.join.Bean.Need;
 import com.lhf.join.R;
+import com.lhf.join.View.Find.FindActivity_Me;
+import com.lhf.join.View.Find.MyFindInformationActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,7 +35,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_DELETENEEDINFORMATION;
-import static com.lhf.join.Constant.Constant.URL_DELETEORDERINFORMATION;
 
 public class NeedAdapter extends RecyclerView.Adapter<NeedAdapter.ViewHolder> {
     private List<Need> mNeedlist;
@@ -68,8 +71,21 @@ public class NeedAdapter extends RecyclerView.Adapter<NeedAdapter.ViewHolder> {
 
     @Override
     public NeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_need, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_need, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+        holder.needView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Need need = mNeedlist.get(position);
+                Intent intent = new Intent(mContext, MyFindInformationActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("need", need);
+                intent.putExtras(mBundle);
+                mContext.startActivity(intent);
+
+            }
+        });
         return holder;
     }
 

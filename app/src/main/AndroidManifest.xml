@@ -64,7 +64,8 @@
         <activity android:name=".View.Stadium.EvaluateActivity" />
         <activity android:name=".View.User.EvaluateInformationActivity" />
         <activity android:name=".View.User.MyEvaluation" />
-        <activity android:name=".View.Stadium.StadiumIconActivity"></activity>
+        <activity android:name=".View.Stadium.StadiumIconActivity" />
+        <activity android:name=".View.Find.MyFindInformationActivity"></activity>
     </application>
 
 </manifest>

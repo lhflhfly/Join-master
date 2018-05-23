@@ -1,21 +1,15 @@
 package com.lhf.join.Adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.lhf.join.Bean.Book;
 import com.lhf.join.Bean.Need;
 import com.lhf.join.Bean.User;
 import com.lhf.join.R;
@@ -23,25 +17,13 @@ import com.lhf.join.View.Find.FindActivity;
 import com.lhf.join.View.Find.FindActivity_Me;
 import com.lhf.join.View.Find.JoinedNeedActivity;
 import com.lhf.join.View.FixedRecyclerView;
-import com.lhf.join.View.Stadium.StadiumActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-import static com.lhf.join.Constant.Constant.URL_DELETENEEDINFORMATION;
 
 public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolder> {
     private List<Need> mNeedlist;
@@ -84,7 +66,7 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
 
     @Override
     public FindAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_find, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_find, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.findView.setOnClickListener(new View.OnClickListener() {
             @Override

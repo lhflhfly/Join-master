@@ -7,32 +7,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lhf.join.Bean.Book;
-import com.lhf.join.Bean.Stadium;
-import com.lhf.join.Bean.User;
 import com.lhf.join.R;
-import com.lhf.join.View.Find.FindActivity_Me;
 import com.lhf.join.View.Stadium.EvaluateActivity;
-import com.lhf.join.View.Stadium.StadiumActivity;
-import com.lhf.join.View.User.LoginActivity;
 import com.lhf.join.View.User.MyEvaluation;
-import com.lhf.join.View.User.OrderInformationActivity;
-import com.lhf.join.View.User.UpdateUserActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +34,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.lhf.join.Constant.Constant.URL_DELETEORDERINFORMATION;
-import static com.lhf.join.Constant.Constant.URL_ORDERINFORMATION;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private List<Book> mBooklist;
@@ -89,7 +75,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_book, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         if(mflag ==3){
             holder.bookView.setOnClickListener(new View.OnClickListener() {
