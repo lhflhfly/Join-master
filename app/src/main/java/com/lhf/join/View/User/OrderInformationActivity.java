@@ -76,6 +76,7 @@ public class OrderInformationActivity extends AppCompatActivity implements ViewP
         initdata();
     }
 
+
     private void initview() {
         user = (User) getIntent().getSerializableExtra("user");
         icon_back = findViewById(R.id.icon_back);

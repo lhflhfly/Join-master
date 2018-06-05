@@ -30,6 +30,7 @@ import com.lhf.join.Adapter.SetStadiumAdapter;
 import com.lhf.join.Adapter.StadiumAdapter;
 import com.lhf.join.Bean.Place;
 import com.lhf.join.Bean.Stadium;
+import com.lhf.join.Fragment.OrderFragment;
 import com.lhf.join.R;
 import com.lhf.join.View.Stadium.SearchStadiumActivity;
 
@@ -59,7 +60,6 @@ public class SetStadiumDialog extends DialogFragment{
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private SetStadiumListener setPlaceListener;
-    private String city;
     private Stadium stadium_set;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
@@ -87,10 +87,10 @@ public class SetStadiumDialog extends DialogFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        city =(String)getActivity().getIntent().getSerializableExtra("city");
-        city = "成都市";
-        System.out.println(city);
-        Search("",city);
+
+
+        System.out.println(OrderFragment.city);
+        Search("",OrderFragment.city);
         layoutManager = new LinearLayoutManager(getContext());
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -98,7 +98,7 @@ public class SetStadiumDialog extends DialogFragment{
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
                     String stadiuname = et_search.getText().toString();
                     System.out.println("11");
-                    Search(stadiuname,city);
+                    Search(stadiuname,OrderFragment.city);
                     System.out.println("22");
                     return false;
                 }
@@ -179,7 +179,7 @@ public class SetStadiumDialog extends DialogFragment{
                         Stadium stadium = new Stadium();
                         stadium.setStadiumId(js.getInt("stadiumId"));
                         stadium.setStadiumname(js.getString("stadiumname"));
-                        stadium.setStadiumtype(js.getString("stadiumtypeId"));
+                        stadium.setStadiumtype(js.getString("stadiumtypename"));
                         stadium.setArea(js.getString("area"));
                         stadium.setIndoor(js.getInt("indoor"));
                         stadium.setAircondition(js.getInt("aircondition"));

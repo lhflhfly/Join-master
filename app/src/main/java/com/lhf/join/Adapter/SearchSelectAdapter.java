@@ -1,4 +1,4 @@
-package com.lhf.join.View;
+package com.lhf.join.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

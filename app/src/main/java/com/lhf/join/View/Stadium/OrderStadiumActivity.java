@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +71,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
     private Stadium stadium;
     private Place place;
     private String time_order;
+    private LinearLayout linearLayout;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
@@ -90,6 +92,7 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
         tv_place = findViewById(R.id.tv_place);
         btn_submit = findViewById(R.id.btn_submit);
         icon_back = findViewById(R.id.icon_back);
+        linearLayout = findViewById(R.id.lout_place);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
 
 
@@ -146,7 +149,8 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
                     String this_day = (year + "年" + (month + 1) + "月" + day + "日");
                     if (this_day.equals(tv_date.getText().toString())) {
                         int time_this = calendar.get(Calendar.HOUR_OF_DAY);
-                        if (time_this > Integer.parseInt(stadium.getClosetime())) {
+                        System.out.println(time_this);
+                        if ((time_this+1)>= Integer.parseInt(stadium.getClosetime())) {
                             Toast.makeText(OrderStadiumActivity.this, "该场馆今日已休息，请选择其他日期", Toast.LENGTH_SHORT).show();
                         } else {
                             setTimeClick(v);
@@ -164,16 +168,30 @@ public class OrderStadiumActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.btn_submit:
-                if (!"".equals(tv_date.getText().toString()) && !"".equals(tv_time.getText().toString()) && !"".equals(tv_place.getText().toString())) {
-                    Calendar c = Calendar.getInstance();
-                    String time = c.get(Calendar.YEAR) + "年" + (c.get(Calendar.MONTH) + 1) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日";
-                    time_order = tv_date.getText().toString() + tv_time.getText().toString();
+                if (stadium.getStadiumtype().equals("滑冰")){
+                    if (!"".equals(tv_date.getText().toString()) && !"".equals(tv_time.getText().toString())) {
+                        Calendar c = Calendar.getInstance();
+                        String time = c.get(Calendar.YEAR) + "年" + (c.get(Calendar.MONTH) + 1) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日";
+                        time_order = tv_date.getText().toString() + tv_time.getText().toString();
 
-                    OrderStadium(user.getUserId(), stadium.getStadiumId(), time, time_order, String.valueOf(place.getPlaceId()), user.getTel());
+                        OrderStadium(user.getUserId(), stadium.getStadiumId(), time, time_order, String.valueOf(place.getPlaceId()), user.getTel());
 
 
-                } else {
-                    Toast.makeText(OrderStadiumActivity.this, "您有未输入的内容", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(OrderStadiumActivity.this, "您有未输入的内容", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    if (!"".equals(tv_date.getText().toString()) && !"".equals(tv_time.getText().toString()) && !"".equals(tv_place.getText().toString())) {
+                        Calendar c = Calendar.getInstance();
+                        String time = c.get(Calendar.YEAR) + "年" + (c.get(Calendar.MONTH) + 1) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日";
+                        time_order = tv_date.getText().toString() + tv_time.getText().toString();
+
+                        OrderStadium(user.getUserId(), stadium.getStadiumId(), time, time_order, String.valueOf(place.getPlaceId()), user.getTel());
+
+
+                    } else {
+                        Toast.makeText(OrderStadiumActivity.this, "您有未输入的内容", Toast.LENGTH_LONG).show();
+                    }
                 }
         }
     }

@@ -14,11 +14,8 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
 
         <TextView
             style="@style/title"
@@ -41,7 +38,7 @@
             android:background="@drawable/btn_radio"
             android:button="@null"
             android:gravity="center"
-            android:text="未到时"
+            android:text="未过期"
             android:textStyle="bold"
             android:textColor="@drawable/btn_txt" />
 
@@ -54,7 +51,7 @@
             android:button="@null"
             android:gravity="center"
             android:textStyle="bold"
-            android:text="已过时"
+            android:text="已过期"
             android:textColor="@drawable/btn_txt" />
     </RadioGroup>
 

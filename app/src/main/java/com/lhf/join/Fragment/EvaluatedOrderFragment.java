@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lhf.join.Adapter.BookAdapter;
@@ -32,6 +33,7 @@ import static com.lhf.join.Constant.Constant.URL_ORDERINFORMATION;
 
 public class EvaluatedOrderFragment extends BaseFragment{
     private User user;
+    private TextView tv_noevaluation;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -42,6 +44,7 @@ public class EvaluatedOrderFragment extends BaseFragment{
         View view = View.inflate(mContext, R.layout.nouse, null);
         recyclerView = view.findViewById(R.id.rv_nouse);
         layoutManager = new LinearLayoutManager(mContext);
+        tv_noevaluation = view.findViewById(R.id.tv_noevaluation);
         return view;
 
 
@@ -50,7 +53,6 @@ public class EvaluatedOrderFragment extends BaseFragment{
     @Override
     public void onResume() {
         super.onResume();
-        orderInformation_nouse(user);
 
     }
 
@@ -128,6 +130,8 @@ public class EvaluatedOrderFragment extends BaseFragment{
             } else {
                 System.out.println("结果为空");
                 List<Book> mData2 = new ArrayList<>();
+                tv_noevaluation.setVisibility(View.VISIBLE);
+                tv_noevaluation.setText("当前没有已评论的预约订单");
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
                 BookAdapter adapter = new BookAdapter(mContext, mData2,3);

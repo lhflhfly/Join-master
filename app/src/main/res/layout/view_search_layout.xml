@@ -20,7 +20,7 @@
                 android:layout_marginLeft="15dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/im_search_gray"
-                android:background="#F0F0F0"
+                android:background="@android:color/transparent"
                 />
             <EditText
                 android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:src="@drawable/im_x"
                 android:visibility="gone"
                 android:scaleType="centerInside"
-                android:background="#F0F0F0" />
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
 </LinearLayout>

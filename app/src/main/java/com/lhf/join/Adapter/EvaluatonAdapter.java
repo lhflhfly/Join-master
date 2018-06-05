@@ -37,12 +37,14 @@ public class EvaluatonAdapter extends FixedRecyclerView.Adapter<EvaluatonAdapter
         TextView username;
         TextView content;
         TextView tv_grade;
+        TextView tv_evaluatetime;
         ImageView user_proflie;
 
         public ViewHolder(View view) {
             super(view);
             findView = view;
             username = view.findViewById(R.id.tv_username);
+            tv_evaluatetime = view.findViewById(R.id.tv_evaluatetime);
             user_proflie = view.findViewById(R.id.proflie);
             tv_grade = view.findViewById(R.id.tv_grade);
             content = view.findViewById(R.id.tv_content);
@@ -70,6 +72,7 @@ public class EvaluatonAdapter extends FixedRecyclerView.Adapter<EvaluatonAdapter
         final Evaluation evaluation = mEvaluation.get(position);
         holder.username.setText(evaluation.getUsername());
         holder.content.setText(evaluation.getContent());
+        holder.tv_evaluatetime.setText(evaluation.getEvaluatetime());
         holder.tv_grade.setText("评分："+evaluation.getGrade());
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(mContext);
         ImageLoader.getInstance().init(configuration);

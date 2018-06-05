@@ -37,6 +37,7 @@ public class MyEvaluation extends AppCompatActivity {
     private ImageView icon_stadium;
     private TextView tv_stadiumname;
     private TextView tv_content;
+    private TextView tv_grade;
     private RatingBar ratingBar;
     private Book book;
     private ImageView icon_back;
@@ -54,6 +55,7 @@ public class MyEvaluation extends AppCompatActivity {
         icon_stadium = findViewById(R.id.icon_stadium);
         tv_stadiumname = findViewById(R.id.tv_stadiumname);
         ratingBar = findViewById(R.id.ratbar);
+        tv_grade = findViewById(R.id.tv_grade);
         tv_content = findViewById(R.id.tv_content);
         icon_back = findViewById(R.id.icon_back);
         getWindow().setStatusBarColor(Color.parseColor("#FF029ACC"));
@@ -75,7 +77,6 @@ public class MyEvaluation extends AppCompatActivity {
         ImageLoader.getInstance().init(configuration);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
-                .showImageOnLoading(R.drawable.loading)
                 .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
                 .delayBeforeLoading(100)  // 下载前的延迟时间
                 .build();
@@ -125,6 +126,7 @@ public class MyEvaluation extends AppCompatActivity {
                         float grade = (float)results.getDouble("grade");
                         String content = results.getString("content");
                         ratingBar.setRating(grade);
+                        tv_grade.setText("评价分数:"+grade);
                         tv_content.setText(content);
                     } else {
                         Toast.makeText(MyEvaluation.this, "获取失败,请重试", Toast.LENGTH_SHORT).show();

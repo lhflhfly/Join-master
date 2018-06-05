@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         TextView time_order;
         Button btn_delete;
         Button btn_evaluate;
+        LinearLayout lout_jian;
 
 
         public ViewHolder(View view) {
@@ -61,6 +64,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             time_order = view.findViewById(R.id.tv_time_order);
             btn_delete = view.findViewById(R.id.btn_delete);
             btn_evaluate = view.findViewById(R.id.btn_evaluate);
+            lout_jian = view.findViewById(R.id.lout_jian);
 
         }
     }
@@ -97,10 +101,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(BookAdapter.ViewHolder holder, final int position) {
         book = mBooklist.get(position);
+        System.out.println("================>"+book.getBookingId());
+        final int bookingId=book.getBookingId();
+        System.out.println(book.getStadiumname());
         holder.stadiumname.setText("场馆名：" + book.getStadiumname());
-        holder.place.setText(book.getPlaceName());
-        holder.time.setText(book.getTime());
-        holder.time_order.setText(book.getTime_order());
+        holder.place.setText("预约场地："+book.getPlaceName());
+        holder.time.setText("下单时间："+book.getTime());
+        holder.time_order.setText("预约时间："+book.getTime_order());
         if (mflag == 0) {
             holder.btn_delete.setVisibility(View.GONE);
             holder.btn_evaluate.setVisibility(View.VISIBLE);
@@ -111,11 +118,35 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         } else if (mflag == 3) {
             holder.btn_delete.setVisibility(View.GONE);
             holder.btn_evaluate.setVisibility(View.GONE);
+            holder.lout_jian.setVisibility(View.VISIBLE);
         }
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitdelete(position, book);
+                AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                        .setTitle("提示")
+                        .setMessage("确认删除此预约？")
+                        .setCancelable(false)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteorderInformation(bookingId);
+                                mBooklist.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(0, mBooklist.size());
+
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                alertDialog.show();
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#4faee9"));
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#4faee9"));
             }
         });
         holder.btn_evaluate.setOnClickListener(new View.OnClickListener() {
@@ -131,35 +162,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     }
 
-    private void submitdelete(final int position, final Book book) {
-        AlertDialog alertDialog = new AlertDialog.Builder(mContext)
-                .setTitle("提示")
-                .setMessage("确认删除此预约？")
-                .setCancelable(false)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mBooklist.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(0, mBooklist.size());
-                        deleteorderInformation(book);
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create();
-        alertDialog.show();
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#4faee9"));
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#4faee9"));
-    }
 
-    private void deleteorderInformation(Book book) {
+    private void deleteorderInformation(int bookingId) {
         String loadingUrl = URL_DELETEORDERINFORMATION;
-        new deleteorderInformationAsyncTask().execute(loadingUrl, String.valueOf(book.getBookingId()));
+        new deleteorderInformationAsyncTask().execute(loadingUrl, String.valueOf(bookingId));
     }
 
     private class deleteorderInformationAsyncTask extends AsyncTask<String, Integer, String> {

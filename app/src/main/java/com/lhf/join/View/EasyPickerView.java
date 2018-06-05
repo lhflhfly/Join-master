@@ -38,10 +38,8 @@ public class EasyPickerView extends View {
     private boolean isRecycleMode;
     // 正常状态下最多显示几个文字，默认3（偶数时，边缘的文字会截断）
     private int maxShowNum;
-
     private TextPaint textPaint;
     private Paint.FontMetrics fm;
-
     private Scroller scroller;
     private VelocityTracker velocityTracker;
     private int minimumVelocity;

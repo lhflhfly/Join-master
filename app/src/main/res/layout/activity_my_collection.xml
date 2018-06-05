@@ -14,11 +14,8 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
 
         <TextView
             style="@style/title"

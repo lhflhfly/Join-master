@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -86,15 +87,20 @@ public class EvaluateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 grade = (double) ratingBar.getRating();
                 String content = et_content.getText().toString();
-                EvaluateStadium(book.getStadiumId(),grade,book.getBookingId(),content,book.getUserId());
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                String evaluatetime = (year + "年" + (month + 1) + "月" + day + "日");
+                EvaluateStadium(book.getStadiumId(),grade,book.getBookingId(),content,book.getUserId(),evaluatetime);
 
             }
         });
     }
 
-    private void EvaluateStadium(int stadiumId, double grade ,int bookingid,String content,int userId) {
+    private void EvaluateStadium(int stadiumId, double grade ,int bookingid,String content,int userId,String time) {
         String orderURL = URL_EVALUATESTADIUM;
-        new EvaluateStadiumAsyncTask().execute(orderURL,String.valueOf(stadiumId), String.valueOf(grade), String.valueOf(bookingid),content,String.valueOf(userId));
+        new EvaluateStadiumAsyncTask().execute(orderURL,String.valueOf(stadiumId), String.valueOf(grade), String.valueOf(bookingid),content,String.valueOf(userId),time);
     }
 
     private class EvaluateStadiumAsyncTask extends AsyncTask<String, Integer, String> {
@@ -109,6 +115,7 @@ public class EvaluateActivity extends AppCompatActivity {
                 json.put("bookingId",params[3]);
                 json.put("content",params[4]);
                 json.put("userId",params[5]);
+                json.put("evaluatetime",params[6]);
                 OkHttpClient okHttpClient = new OkHttpClient();
                 RequestBody requestBody = RequestBody.create(JSON, String.valueOf(json));
                 Request request = new Request.Builder()

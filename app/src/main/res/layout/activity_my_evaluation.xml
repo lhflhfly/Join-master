@@ -13,11 +13,8 @@
         android:background="@android:color/holo_blue_dark">
 
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
 
         <TextView
             style="@style/title"
@@ -37,9 +34,9 @@
 
             <ImageView
                 android:id="@+id/icon_stadium"
-                android:layout_width="140dp"
+                android:layout_width="150dp"
                 android:layout_height="90dp"
-                android:layout_margin="20dp" />
+                android:layout_margin="10dp" />
         </LinearLayout>
         <View
             android:layout_width="2dp"
@@ -70,11 +67,11 @@
         android:background="@android:color/darker_gray"/>
 
         <TextView
+            android:id="@+id/tv_grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="评价星级:"
+            android:layout_gravity="center"
             android:textColor="@android:color/black"
             android:textSize="16dp" />
 
@@ -87,6 +84,7 @@
             android:layout_marginTop="8dp"
             android:isIndicator="false"
             android:numStars="5" />
+
 
         <View
             android:layout_marginTop="20dp"

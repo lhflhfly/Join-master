@@ -34,6 +34,8 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Request;
 
+import static com.lhf.join.Constant.Constant.URL_UPDATEPROFILE;
+
 public class UpdateProflieActivity extends AppCompatActivity {
     private Button btn;
     private Button btn_xuanze;
@@ -149,7 +151,7 @@ public class UpdateProflieActivity extends AppCompatActivity {
 
     public void multiFileUpload()
     {
-        String mBaseUrl = "http://192.168.1.106:8080/UpdateProfile_Servlet";
+        String mBaseUrl = URL_UPDATEPROFILE;
         RequestParams params = new RequestParams(mBaseUrl);
         //创建List<KeyValue>对象
         List<KeyValue> list = new ArrayList<>();

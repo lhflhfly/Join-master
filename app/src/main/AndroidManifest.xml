@@ -30,11 +30,20 @@
 
         <activity
             android:name=".View.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".View.User.RegisterActivity" />
-        <activity android:name=".View.User.UpdateUserActivity" />
-        <activity android:name=".View.User.UserInformationActivity" />
-        <activity android:name=".View.User.LoginActivity" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.UpdateUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.UserInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
@@ -48,24 +57,60 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Stadium.SearchStadiumActivity" />
-        <activity android:name=".View.Stadium.StadiumActivity" />
-        <activity android:name=".View.Stadium.OrderStadiumActivity" />
-        <activity android:name=".View.User.OrderInformationActivity" />
-        <activity android:name=".View.User.NeedInformationActivity" />
-        <activity android:name=".View.Find.InsertNeedActivity" />
-        <activity android:name=".View.Find.FindActivity" />
-        <activity android:name=".View.User.UpdatePassword" />
-        <activity android:name=".View.Find.FindActivity_Me" />
-        <activity android:name=".View.Collection.MyCollection" />
-        <activity android:name=".View.Find.MyJoinNeedActivity" />
-        <activity android:name=".View.Find.JoinedNeedActivity" />
-        <activity android:name=".View.User.UpdateProflieActivity" />
-        <activity android:name=".View.Stadium.EvaluateActivity" />
-        <activity android:name=".View.User.EvaluateInformationActivity" />
-        <activity android:name=".View.User.MyEvaluation" />
-        <activity android:name=".View.Stadium.StadiumIconActivity" />
-        <activity android:name=".View.Find.MyFindInformationActivity"></activity>
+        <activity
+            android:name=".View.Stadium.SearchStadiumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Stadium.StadiumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Stadium.OrderStadiumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.OrderInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.NeedInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Find.InsertNeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Find.FindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.UpdatePassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Find.FindActivity_Me"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Collection.MyCollection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Find.MyJoinNeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Find.JoinedNeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.UpdateProflieActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Stadium.EvaluateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.EvaluateInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.User.MyEvaluation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Stadium.StadiumIconActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.Find.MyFindInformationActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

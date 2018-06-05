@@ -14,6 +14,15 @@ public class Need implements Serializable {
     private String sportstype;
     private int num_join;
     private String proflie;
+    private String releasetime;
+
+    public String getReleasetime() {
+        return releasetime;
+    }
+
+    public void setReleasetime(String releasetime) {
+        this.releasetime = releasetime;
+    }
 
     public String getProflie() {
         return proflie;

@@ -13,11 +13,8 @@
         android:background="@android:color/holo_blue_dark">
 
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
 
         <TextView
             style="@style/title"
@@ -35,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
             android:textColor="@color/colorPrimary"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.RecyclerView

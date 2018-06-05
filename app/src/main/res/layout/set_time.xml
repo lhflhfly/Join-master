@@ -31,7 +31,7 @@
             custom:epvTextMaxScale="2.0"
             custom:epvTextMinAlpha="0.35"
             custom:epvTextPadding="10dp"
-            custom:epvTextSize="20sp" />
+            custom:epvTextSize="15sp" />
 
 
     </LinearLayout>

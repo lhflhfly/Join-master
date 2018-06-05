@@ -78,7 +78,7 @@ public class SetNumDialog extends DialogFragment{
     }
 
     private void initNum() {
-        final ArrayList<String> numList = new ArrayList<>();
+        final ArrayList<String> numList = new ArrayList<>();//数据源1-20
         for (int i=1;i<21;i++){
              numList.add(String.valueOf(i));
         }
@@ -113,7 +113,7 @@ public class SetNumDialog extends DialogFragment{
         return dialog;
     }
     public interface SetNumListener{
-        void onSetPlaceComplete(int num1);
+        void onSetPlaceComplete(int num1);//接口返回选择的人数
     }
 
     @Override

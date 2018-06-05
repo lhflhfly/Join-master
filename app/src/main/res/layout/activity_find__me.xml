@@ -14,11 +14,8 @@
         android:background="@android:color/holo_blue_dark">
 
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
 
         <TextView
             style="@style/title"
@@ -31,12 +28,15 @@
         android:layout_height="80dp"
         android:paddingLeft="50dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/user_proflie"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:src="@drawable/me" />
+            android:src="@drawable/me"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@android:color/white"/>
 
         <TextView
             android:id="@+id/tv_username"
@@ -54,7 +54,7 @@
         android:background="@drawable/border"
         android:divider="@drawable/line"
         android:orientation="vertical"
-        android:showDividers="middle|end">
+        android:showDividers="middle">
 
         <TextView
             android:id="@+id/tv_stadiumname"

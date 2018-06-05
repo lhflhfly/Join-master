@@ -8,7 +8,7 @@ import okhttp3.MediaType;
  */
 
 public class Constant {
-    public static String URL = "http://192.168.1.106:8080/"; //511wifi IP地址
+    public static String URL = "http://192.168.1.105:8080/"; //511wifi IP地址
 //    public static String URL = "http://192.168.1.108:8080/"; //511wifi IP地址
 //        public static String URL = "http://192.168.43.252:8080/"; //511wifi IP地址
     //        public static String URL = "http://192.168.31.219:8080/"; //连寝室wifi IP地址
@@ -48,4 +48,5 @@ public class Constant {
     public static String URL_LOADINGICON = URL+"LoadingIcon_Servlet";
     public static String URL_GETEVALUATEINFORMATION = URL+"GetEvaluateInformation_Servlet";
     public static String URL_JOINEDUSERINFORMATION = URL+"JoinedUserInformation_Servlet";
-        }
+    public static String URL_UPDATEPROFILE = URL+"UpdateProfile_Servlet";
+}

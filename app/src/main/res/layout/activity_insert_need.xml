@@ -14,11 +14,8 @@
         android:background="@android:color/holo_blue_dark">
 
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
 
         <TextView
             style="@style/title"
@@ -40,6 +37,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/stadium"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -65,6 +67,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/date"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,6 +98,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/time"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,11 +128,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/num"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="人数：" />
+
             <TextView
                 android:id="@+id/tv_num"
                 android:layout_width="wrap_content"

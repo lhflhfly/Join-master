@@ -39,7 +39,7 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
         TextView num;
         TextView num_join;
         TextView time;
-        TextView remark;
+        TextView tv_releasetime;
         ImageView user_proflie;
 
         public ViewHolder(View view) {
@@ -50,8 +50,8 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
             num = view.findViewById(R.id.tv_num);
             time = view.findViewById(R.id.tv_time);
             num_join = view.findViewById(R.id.tv_num_join);
-            remark = view.findViewById(R.id.tv_remark);
             user_proflie = view.findViewById(R.id.user_proflie);
+            tv_releasetime = view.findViewById(R.id.tv_releasetime);
 
         }
     }
@@ -107,11 +107,11 @@ public class FindAdapter extends FixedRecyclerView.Adapter<FindAdapter.ViewHolde
     public void onBindViewHolder(FindAdapter.ViewHolder holder, final int position) {
         final Need need = mNeedlist.get(position);
         holder.username.setText(need.getUsername());
-        holder.stadiumname.setText("场馆名：" + need.getStadiumname());
+        holder.stadiumname.setText("地点：" + need.getStadiumname());
         holder.time.setText("时间:" + need.getTime());
         holder.num.setText("召集人数:" + need.getNum());
         holder.num_join.setText("加入人数:" + need.getNum_join());
-        holder.remark.setText("备注:" + need.getRemark());
+        holder.tv_releasetime.setText(need.getReleasetime());
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(mContext);
         ImageLoader.getInstance().init(configuration);
         DisplayImageOptions options = new DisplayImageOptions.Builder()

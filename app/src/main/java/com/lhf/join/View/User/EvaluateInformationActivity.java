@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +30,7 @@ public class EvaluateInformationActivity extends AppCompatActivity implements Vi
     public static final int PAGE_TWO = 1;
     private RadioGroup mRg_main;
     private User user;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RadioButton rb_nouse;
     private RadioButton rb_used;
     private ViewPager viewpager;
@@ -71,6 +73,7 @@ public class EvaluateInformationActivity extends AppCompatActivity implements Vi
         viewpager.setAdapter(new EvaluatePagerAdapter(getSupportFragmentManager()));
         viewpager.setCurrentItem(0);
         mRg_main.setOnCheckedChangeListener(this);
+
 
 
     }

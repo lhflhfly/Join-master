@@ -26,7 +26,7 @@
 
 
             <TextView
-                android:layout_weight="7"
+                android:layout_weight="10"
                 android:id="@+id/tv_username"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -37,6 +37,10 @@
                 android:textSize="25sp" />
 
         </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#b7c8c7c7"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,21 +60,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/personal"
                     android:layout_width="0dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="个人信息"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn_order"
@@ -79,21 +84,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/order_find"
                     android:layout_width="0dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="@string/booking_management"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -103,21 +109,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/evaluate"
                     android:layout_width="0dp"
                     android:layout_height="27dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="@string/myevaluate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,21 +134,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/need_find"
                     android:layout_width="0dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="@string/demand_management"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,21 +159,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/joinneed"
                     android:layout_width="0dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="@string/join_need"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn_collect"
@@ -174,21 +183,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/collectoin"
                     android:layout_width="0dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="@string/mycollection"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -198,21 +208,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:src="@drawable/exit_find"
                     android:layout_width="0dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:textSize="15sp"
-                    android:layout_weight="4"
+                    android:layout_weight="7"
                     android:layout_gravity="center"
                     android:text="退出登录"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:layout_weight="1"
                     android:src="@drawable/jian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
             </LinearLayout>
 
 

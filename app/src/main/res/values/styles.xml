@@ -38,8 +38,8 @@
 
     <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingstars</item>
-        <item name="android:minHeight">22dp</item>
-        <item name="android:maxHeight">22dp</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxHeight">30dp</item>
     </style>
 
     <style name="RatingBar_evaluate" parent="@android:style/Widget.RatingBar">
@@ -70,6 +70,13 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <style name="icon_back">
+        <item name="android:layout_width">25sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_height">25sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@drawable/back</item>
     </style>
 
     <style name="MyEditText" parent="Theme.AppCompat.Light">

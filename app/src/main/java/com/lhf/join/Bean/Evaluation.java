@@ -5,6 +5,15 @@ public class Evaluation {
     private String icon;
     private String content;
     private Double grade;
+    private String evaluatetime;
+
+    public String getEvaluatetime() {
+        return evaluatetime;
+    }
+
+    public void setEvaluatetime(String evaluatetime) {
+        this.evaluatetime = evaluatetime;
+    }
 
     public Double getGrade() {
         return grade;

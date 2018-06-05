@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bingoogolapple.bgabanner.BGABanner;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -52,7 +53,6 @@ public class FindFragment extends BaseFragment{
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ObservableScrollView sv_find;
-    private TextView tv_nofind;
     private SwipeRefreshLayout swipeRefreshLayout;
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
@@ -65,7 +65,6 @@ public class FindFragment extends BaseFragment{
         floatingActionButton=view.findViewById(R.id.fab_add_comment);
         mLocationClient = new LocationClient(mContext);
         recyclerView = view.findViewById(R.id.rv_find);
-        tv_nofind = view.findViewById(R.id.tv_nofind);
         layoutManager = new LinearLayoutManager(mContext);
         swipeRefreshLayout = view.findViewById(R.id.sr_find);
         sv_find = view.findViewById(R.id.sv_find);
@@ -87,7 +86,6 @@ public class FindFragment extends BaseFragment{
 
     @Override
     protected void initData() {
-        tv_nofind.setText("");
         user = (User) getActivity().getIntent().getSerializableExtra("user");
         mLocationClient.registerLocationListener(new MyLocationListener());
         requestLocation();
@@ -109,7 +107,7 @@ public class FindFragment extends BaseFragment{
                 }
             }
         });
-        findInformation(user);
+        findInformation(user,OrderFragment.city);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -178,9 +176,9 @@ public class FindFragment extends BaseFragment{
         }
     }
 
-    private void findInformation(User user) {
+    private void findInformation(User user,String city) {
         String loadingUrl = URL_FINDINFORMATION;
-        new findInformationAsyncTask().execute(loadingUrl,String.valueOf(user.getUserId()));
+        new findInformationAsyncTask().execute(loadingUrl,String.valueOf(user.getUserId()),city);
     }
 
     private class findInformationAsyncTask extends AsyncTask<String, Integer, String> {
@@ -196,6 +194,7 @@ public class FindFragment extends BaseFragment{
             try {
                 json.put("userId",params[1]);
                 json.put("method",method);
+                json.put("city",params[2]);
                 OkHttpClient okHttpClient = new OkHttpClient();
                 RequestBody requestBody = RequestBody.create(JSON, String.valueOf(json));
                 Request request = new Request.Builder()
@@ -232,7 +231,7 @@ public class FindFragment extends BaseFragment{
                         need.setNum_join(js.getInt("num_join"));
                         need.setProflie(URL_PROFLIE+js.optString("userproflie"));
                         need.setRemark(js.getString("remark"));
-
+                        need.setReleasetime(js.optString("releasetime"));
                         mData.add(need);
                     }
                     recyclerView.setLayoutManager(layoutManager);
@@ -246,7 +245,6 @@ public class FindFragment extends BaseFragment{
                 }
             }else {
                 System.out.println("结果为空");
-                tv_nofind.setText("当前没有召集信息");
                 List<Need> mData2 = new ArrayList<>();
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));

@@ -12,11 +12,8 @@
         android:gravity="center"
         android:layout_height="?attr/actionBarSize">
         <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_gravity="center"
-            android:src="@drawable/back" />
+            style="@style/icon_back"
+            android:id="@+id/icon_back"/>
         <TextView
             style="@style/title"
             android:text="加入的需求"
@@ -36,6 +33,7 @@
         <TextView
             android:id="@+id/tv_no"
             android:textSize="20dp"
+            android:textColor="@android:color/holo_red_dark"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -86,8 +86,9 @@ public class OrderFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private TextView tv_city;
     private User user;
-    private TextView tv_search;
+    private LinearLayout tv_search;
     private ImageView icon;
+    public static String city;
     private ViewFlipper vf;
     private TextView gonggao, gonggao2, gonggao3, gonggao4;
     private ProgressDialog progressDialog;
@@ -572,6 +573,7 @@ public class OrderFragment extends BaseFragment {
             @Override
             public void onSelected(String info) {
                 tv_city.setText(info);
+                city=tv_city.getText().toString();
                 swipeRefreshLayout.post(new Runnable() {
 
                     @Override
@@ -604,6 +606,7 @@ public class OrderFragment extends BaseFragment {
                         tv_city.setText("城市名");
                     } else {
                         tv_city.setText(BDLocation.getCity());
+                        city=tv_city.getText().toString();
                         Loading(tv_city.getText().toString());
                         mLocationClient.stop();
                         return;

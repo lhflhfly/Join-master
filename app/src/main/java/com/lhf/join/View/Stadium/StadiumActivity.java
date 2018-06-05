@@ -88,9 +88,6 @@ public class StadiumActivity extends AppCompatActivity {
         stadium = (Stadium) getIntent().getSerializableExtra("stadium");
         initview();
         initdata();
-
-
-
     }
 
     private void initview() {
@@ -119,6 +116,9 @@ public class StadiumActivity extends AppCompatActivity {
     }
 
     private void initdata() {
+        if(stadium.getStadiumtype().equals("滑冰")){
+            btn_order.setVisibility(View.GONE);
+        }
         user = (User) getIntent().getSerializableExtra("user");
         isCollectd(stadium.getStadiumId(), user.getUserId());
         System.out.println("userId:" + user.getUserId());
@@ -136,6 +136,20 @@ public class StadiumActivity extends AppCompatActivity {
         tv_num.setText(stadium.getNum() + "人");
         tv_opentime.setText(stadium.getOpentime()+":00--"+stadium.getClosetime()+":00");
         ratingBar.setRating(stadium.getGrade());
+        ratingBar.setIsIndicator(true);
+        tv_adress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    try {
+                        Intent intent = Intent.getIntent("intent://map/direction?destination="+stadium.getAdress() + // 终点
+                                "&mode=driving&" + // 导航路线方式
+                                "&src=新疆和田#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+                        startActivity(intent); // 启动调用
+                    } catch (Exception e) {
+
+                    }
+            }
+        });
         icon_stadium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,16 +177,9 @@ public class StadiumActivity extends AppCompatActivity {
                 .showImageOnFail(R.drawable.error) // 设置图片加载或解码过程中发生错误显示的图片
                 .showImageOnLoading(R.drawable.loading)
                 .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
-                .delayBeforeLoading(1000)  // 下载前的延迟时间
+                .delayBeforeLoading(0)  // 下载前的延迟时间
                 .build();
         ImageLoader.getInstance().displayImage(stadium.getMainpicture(),icon_stadium,options);
-//        Glide.with(this)
-//                .load(stadium.getMainpicture())
-//                .placeholder(R.drawable.loading)
-//                .skipMemoryCache(true)
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                .error(R.drawable.error)
-//                .into(icon_stadium);
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -383,6 +390,7 @@ public class StadiumActivity extends AppCompatActivity {
                         evaluation.setContent(js.getString("content"));
                         evaluation.setIcon(URL_PROFLIE+js.getString("proflie"));
                         evaluation.setGrade(js.getDouble("grade"));
+                        evaluation.setEvaluatetime(js.getString("evaluatetime"));
                         mData.add(evaluation);
                     }
                     tv_evaluation.setText("--用户评论("+results.length()+")--");

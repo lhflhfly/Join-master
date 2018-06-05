@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.lhf.join.Adapter.SearchSelectAdapter;
 import com.lhf.join.R;
 
 import java.util.ArrayList;
